@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dd1ecls30doww"]
+
+[ext_resource type="Texture2D" uid="uid://ceike3ch1bdax" path="res://icon.png" id="1_1geah"]
+
+[node name="UI_inventory" type="CanvasLayer" unique_id=592469890]
+
+[node name="Control" type="Control" parent="." unique_id=1778147938]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control" unique_id=1809224166]
+layout_mode = 0
+offset_left = 1707.0
+offset_top = -3.0
+offset_right = 1922.0
+offset_bottom = 1078.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1471042241]
+layout_mode = 0
+offset_left = 1726.0
+offset_top = 20.0
+offset_right = 1898.0
+offset_bottom = 1057.0
+theme_override_constants/separation = 20
+
+[node name="Icon" type="TextureRect" parent="Control/VBoxContainer" unique_id=1136429569]
+custom_minimum_size = Vector2(80, 250)
+layout_mode = 2
+texture = ExtResource("1_1geah")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Icon2" type="TextureRect" parent="Control/VBoxContainer" unique_id=576033849]
+layout_mode = 2
+texture = ExtResource("1_1geah")
+expand_mode = 4
+stretch_mode = 5

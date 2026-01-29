@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ckyi53hdl7i0w"]
+
+[ext_resource type="Texture2D" uid="uid://rt52kumtifcq" path="res://assets/rooms/room_01.jpeg" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dd1ecls30doww" path="res://scenes/UI/UI_inventory.tscn" id="2_0wfyh"]
+
+[node name="main" type="Node2D" unique_id=427153664]
+
+[node name="bg_room01" type="Sprite2D" parent="." unique_id=1869576370]
+position = Vector2(960.375, 538.75)
+scale = Vector2(3.6045966, 3.5883336)
+texture = ExtResource("1_o5qli")
+
+[node name="UI_inventory" parent="." unique_id=592469890 instance=ExtResource("2_0wfyh")]
