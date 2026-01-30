@@ -1,0 +1,116 @@
+[gd_resource type="Resource" script_class="FlowGraph" format=3 uid="uid://cfbrp3ixx2j8v"]
+
+[ext_resource type="Script" path="res://scripts/flow/FlowGraph.gd" id="1_7g5yq"]
+[ext_resource type="Script" path="res://scripts/flow/FlowStep.gd" id="2_9m1q0"]
+[ext_resource type="Script" path="res://scripts/flow/FlowAction.gd" id="3_4y2ar"]
+
+[sub_resource type="Resource" id="Resource_A1"]
+script = ExtResource("2_9m1q0")
+step_id = "A1"
+thread_id = "A"
+description = "线索A 第1步：等待 hs_a1_done"
+complete_flags_all = PackedStringArray("hs_a1_done")
+next_ids = PackedStringArray("A2")
+
+[sub_resource type="Resource" id="Resource_A2"]
+script = ExtResource("2_9m1q0")
+step_id = "A2"
+thread_id = "A"
+description = "线索A 第2步：等待 hs_a2_done"
+enable_flags_all = PackedStringArray("A1_completed")
+complete_flags_all = PackedStringArray("hs_a2_done")
+next_ids = PackedStringArray("A3")
+
+[sub_resource type="Resource" id="Resource_A3"]
+script = ExtResource("2_9m1q0")
+step_id = "A3"
+thread_id = "A"
+description = "线索A 第3步：等待 hs_a3_done"
+enable_flags_all = PackedStringArray("A2_completed")
+complete_flags_all = PackedStringArray("hs_a3_done")
+next_ids = PackedStringArray("End")
+
+[sub_resource type="Resource" id="Resource_B1"]
+script = ExtResource("2_9m1q0")
+step_id = "B1"
+thread_id = "B"
+description = "线索B 第1步：等待 hs_b1_done"
+complete_flags_all = PackedStringArray("hs_b1_done")
+next_ids = PackedStringArray("B2")
+
+[sub_resource type="Resource" id="Resource_B2"]
+script = ExtResource("2_9m1q0")
+step_id = "B2"
+thread_id = "B"
+description = "线索B 第2步：等待 hs_b2_done"
+enable_flags_all = PackedStringArray("B1_completed")
+complete_flags_all = PackedStringArray("hs_b2_done")
+next_ids = PackedStringArray("B3")
+
+[sub_resource type="Resource" id="Resource_B3"]
+script = ExtResource("2_9m1q0")
+step_id = "B3"
+thread_id = "B"
+description = "线索B 第3步：等待 hs_b3_done"
+enable_flags_all = PackedStringArray("B2_completed")
+complete_flags_all = PackedStringArray("hs_b3_done")
+next_ids = PackedStringArray("End")
+
+[sub_resource type="Resource" id="Resource_C1"]
+script = ExtResource("2_9m1q0")
+step_id = "C1"
+thread_id = "C"
+description = "线索C 第1步：等待 hs_c1_done"
+complete_flags_all = PackedStringArray("hs_c1_done")
+next_ids = PackedStringArray("C2")
+
+[sub_resource type="Resource" id="Resource_C2"]
+script = ExtResource("2_9m1q0")
+step_id = "C2"
+thread_id = "C"
+description = "线索C 第2步：等待 hs_c2_done"
+enable_flags_all = PackedStringArray("C1_completed")
+complete_flags_all = PackedStringArray("hs_c2_done")
+next_ids = PackedStringArray("C3")
+
+[sub_resource type="Resource" id="Resource_C3"]
+script = ExtResource("2_9m1q0")
+step_id = "C3"
+thread_id = "C"
+description = "线索C 第3步：等待 hs_c3_done"
+enable_flags_all = PackedStringArray("C2_completed")
+complete_flags_all = PackedStringArray("hs_c3_done")
+next_ids = PackedStringArray("End")
+
+[sub_resource type="Resource" id="Resource_End"]
+script = ExtResource("2_9m1q0")
+step_id = "End"
+thread_id = "End"
+description = "汇合：A3/B3/C3 都完成后通关"
+enable_flags_all = PackedStringArray("A3_completed", "B3_completed", "C3_completed")
+complete_flags_all = PackedStringArray("game_completed")
+on_enter_actions = Array[Resource]([SubResource("Resource_EndEnter")])
+
+[sub_resource type="Resource" id="Resource_EndEnter"]
+script = ExtResource("3_4y2ar")
+type = 0
+flag_name = "game_completed"
+flag_value = true
+
+[resource]
+script = ExtResource("1_7g5yq")
+graph_id = "demo_flow_abc"
+start_step_ids = PackedStringArray("A1", "B1", "C1")
+steps = Array[Resource]([
+SubResource("Resource_A1"),
+SubResource("Resource_A2"),
+SubResource("Resource_A3"),
+SubResource("Resource_B1"),
+SubResource("Resource_B2"),
+SubResource("Resource_B3"),
+SubResource("Resource_C1"),
+SubResource("Resource_C2"),
+SubResource("Resource_C3"),
+SubResource("Resource_End")
+])
+

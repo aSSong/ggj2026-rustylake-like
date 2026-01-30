@@ -1,39 +1,88 @@
 [gd_scene format=3 uid="uid://dd1ecls30doww"]
 
-[ext_resource type="Texture2D" uid="uid://ceike3ch1bdax" path="res://icon.png" id="1_1geah"]
+[ext_resource type="Texture2D" uid="uid://bg6ncdh62pjxe" path="res://assets/items/genericItem_color_154.png" id="2_er6tw"]
+[ext_resource type="Script" uid="uid://ycusmcn3017m" path="res://scenes/UI/UI_inventory.gd" id="2_invui"]
 
 [node name="UI_inventory" type="CanvasLayer" unique_id=592469890]
+script = ExtResource("2_invui")
 
 [node name="Control" type="Control" parent="." unique_id=1778147938]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Control" unique_id=1809224166]
-layout_mode = 0
-offset_left = 1707.0
-offset_top = -3.0
-offset_right = 1922.0
-offset_bottom = 1078.0
+[node name="FxLayer" type="Control" parent="Control" unique_id=176023551]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1471042241]
+[node name="Bar" type="Panel" parent="Control" unique_id=1809224166]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -1056.0
+offset_right = -30.0
+offset_bottom = -936.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Scroll" type="ScrollContainer" parent="Control/Bar" unique_id=1471042241]
 layout_mode = 0
-offset_left = 1726.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1850.0
+offset_bottom = 130.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="Slots" type="HBoxContainer" parent="Control/Bar/Scroll" unique_id=1136429569]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ItemPopup" type="PopupPanel" parent="Control" unique_id=576033849]
+oversampling_override = 1.0
+size = Vector2i(300, 608)
+visible = false
+
+[node name="Panel" type="Panel" parent="Control/ItemPopup" unique_id=82841411]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 604.0
+
+[node name="VBox" type="VBoxContainer" parent="Control/ItemPopup/Panel" unique_id=82751412]
+layout_mode = 0
+offset_left = 20.0
 offset_top = 20.0
-offset_right = 1898.0
-offset_bottom = 1057.0
-theme_override_constants/separation = 20
+offset_right = -20.0
+offset_bottom = -20.0
+theme_override_constants/separation = 12
 
-[node name="Icon" type="TextureRect" parent="Control/VBoxContainer" unique_id=1136429569]
-custom_minimum_size = Vector2(80, 250)
+[node name="InspectImage" type="TextureRect" parent="Control/ItemPopup/Panel/VBox" unique_id=82751413]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("1_1geah")
+texture = ExtResource("2_er6tw")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Icon2" type="TextureRect" parent="Control/VBoxContainer" unique_id=576033849]
+[node name="Name" type="Label" parent="Control/ItemPopup/Panel/VBox" unique_id=82751414]
+custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-texture = ExtResource("1_1geah")
-expand_mode = 4
-stretch_mode = 5
+text = "道具名"
+horizontal_alignment = 1
+
+[node name="Desc" type="RichTextLabel" parent="Control/ItemPopup/Panel/VBox" unique_id=82751415]
+layout_mode = 2
+text = "道具描述"
+fit_content = true

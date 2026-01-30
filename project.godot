@@ -18,6 +18,11 @@ config/icon="uid://ceike3ch1bdax"
 [autoload]
 
 Dialogic="*uid://ds2q0uclmolvu"
+EventBus="*res://autoload/EventBus.gd"
+GameState="*res://autoload/GameState.gd"
+SceneFlow="*res://autoload/SceneFlow.gd"
+ItemDB="*res://autoload/ItemDB.gd"
+Inventory="*res://autoload/Inventory.gd"
 
 [dialogic]
 
@@ -26,7 +31,11 @@ directories/dch_directory={
 "unit_test_character": "res://Tests/Resources/unit_test_character.dch"
 }
 directories/dtl_directory={
-"op_01": "res://dialogues/op_01.dtl"
+"dialogues/ed_01": "res://dialogues/ed_01.dtl",
+"op_01": "res://dialogues/op_01.dtl",
+"test_book_block": "res://dialogues/getitems/test_book_block.dtl",
+"test_book_click": "res://dialogues/getitems/test_book_click.dtl",
+"test_key_get": "res://dialogues/getitems/test_key_get.dtl"
 }
 layout/style_directory={
 "": "res://dialogues/dialog_style.tres",

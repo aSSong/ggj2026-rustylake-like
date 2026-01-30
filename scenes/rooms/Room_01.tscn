@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://cq02iibl77pfo"]
+
+[ext_resource type="Texture2D" uid="uid://rt52kumtifcq" path="res://assets/rooms/room_01.jpeg" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://6ssdi1ey4jp7" path="res://scenes/HotSpotArea.tscn" id="2_oyc2o"]
+[ext_resource type="Script" uid="uid://d14xt8x4u4i3p" path="res://scripts/hotspots/HotSpotConditions.gd" id="3_3h5tv"]
+[ext_resource type="Texture2D" uid="uid://bg6ncdh62pjxe" path="res://assets/items/genericItem_color_154.png" id="3_mtqkf"]
+[ext_resource type="Script" uid="uid://b8lw6xwksp2rg" path="res://scripts/hotspots/HotSpotConditionSet.gd" id="4_0xan3"]
+[ext_resource type="Texture2D" uid="uid://dlejen2yeqaiy" path="res://assets/items/genericItem_color_035.png" id="6_a71us"]
+[ext_resource type="Script" uid="uid://bw3h3uyqpgwpf" path="res://scripts/rooms/RoomController.gd" id="7_rc"]
+[ext_resource type="Script" uid="uid://biixp4urs4qxy" path="res://scripts/hotspots/HotSpotState.gd" id="8_state"]
+[ext_resource type="Script" uid="uid://c1ckjraaop767" path="res://scripts/hotspots/HotSpotAction.gd" id="9_action"]
+
+[sub_resource type="Resource" id="Resource_HS01_Interactable"]
+script = ExtResource("4_0xan3")
+requires_flags_all = PackedStringArray("flow_hs01_enabled")
+requires_flags_any = null
+requires_items = null
+forbids_flags = null
+
+[sub_resource type="Resource" id="Resource_HS01_Conditions"]
+script = ExtResource("3_3h5tv")
+interactable = SubResource("Resource_HS01_Interactable")
+
+[sub_resource type="Resource" id="Resource_HS01_ActionPickup"]
+script = ExtResource("9_action")
+type = 1
+params = {
+"fly": true,
+"item_key": "test_key"
+}
+
+[sub_resource type="Resource" id="Resource_HS01_ActionDone"]
+script = ExtResource("9_action")
+type = 5
+params = {
+"name": "hs_01_done",
+"value": true
+}
+
+[sub_resource type="Resource" id="Resource_37ggs"]
+script = ExtResource("9_action")
+type = 6
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_HS01_State"]
+script = ExtResource("8_state")
+state_id = "enabled"
+conditions = SubResource("Resource_HS01_Conditions")
+texture = ExtResource("3_mtqkf")
+click_dialog_timeline = "uid://dwfx18ehbg6lo"
+actions = Array[Resource]([SubResource("Resource_HS01_ActionPickup"), SubResource("Resource_HS01_ActionDone"), SubResource("Resource_37ggs")])
+
+[sub_resource type="Resource" id="Resource_HS02_Interactable"]
+script = ExtResource("4_0xan3")
+requires_flags_all = PackedStringArray("flow_hs02_enabled")
+requires_flags_any = null
+requires_items = null
+forbids_flags = null
+
+[sub_resource type="Resource" id="Resource_HS02_Conditions"]
+script = ExtResource("3_3h5tv")
+interactable = SubResource("Resource_HS02_Interactable")
+
+[sub_resource type="Resource" id="Resource_HS02_ActionDone"]
+script = ExtResource("9_action")
+type = 5
+params = {
+"name": "hs_02_done",
+"value": true
+}
+
+[sub_resource type="Resource" id="Resource_HS02_State"]
+script = ExtResource("8_state")
+state_id = "enabled"
+conditions = SubResource("Resource_HS02_Conditions")
+texture = ExtResource("6_a71us")
+blocked_dialog_timeline = "uid://dei4i0puynrq3"
+actions = Array[Resource]([SubResource("Resource_HS02_ActionDone")])
+
+[node name="Room_01" type="Node2D" unique_id=765094737]
+
+[node name="RoomController" type="Node" parent="." unique_id=1219460738]
+script = ExtResource("7_rc")
+
+[node name="bg_room01" type="Sprite2D" parent="." unique_id=309316992]
+position = Vector2(960.375, 538.75)
+scale = Vector2(3.6045966, 3.5883336)
+texture = ExtResource("1_o5qli")
+
+[node name="HS_01" parent="." unique_id=959689758 instance=ExtResource("2_oyc2o")]
+position = Vector2(960, 540)
+hotspot_id = "HS_01"
+visual_texture = ExtResource("3_mtqkf")
+conditions = SubResource("Resource_HS01_Conditions")
+states = Array[Resource]([SubResource("Resource_HS01_State")])
+
+[node name="Sprite2D" parent="HS_01" index="0" unique_id=988138504]
+texture = ExtResource("3_mtqkf")
+
+[node name="HS_02" parent="." unique_id=586662335 instance=ExtResource("2_oyc2o")]
+position = Vector2(1290, 540)
+hotspot_id = "HS_02"
+conditions = SubResource("Resource_HS02_Conditions")
+states = Array[Resource]([SubResource("Resource_HS02_State")])
+
+[node name="Sprite2D" parent="HS_02" index="0" unique_id=988138504]
+texture = ExtResource("6_a71us")
+
+[editable path="HS_01"]
+[editable path="HS_02"]

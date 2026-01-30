@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://6ssdi1ey4jp7"]
+
+[ext_resource type="Script" uid="uid://dkh5k6dvbaapw" path="res://scripts/hotspots/HotSpotArea.gd" id="1_4v0q8"]
+[ext_resource type="Texture2D" uid="uid://ceike3ch1bdax" path="res://icon.png" id="2_tqgou"]
+
+[node name="HotSpotArea" type="Node2D" unique_id=1752983682]
+script = ExtResource("1_4v0q8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=988138504]
+texture = ExtResource("2_tqgou")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1703123123]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=279463627]
+position = Vector2(-8.000001, -7)
+scale = Vector2(12.812499, 8.990385)
+polygon = PackedVector2Array(-8.039024, 1.3347592, -7.546341, -11.234758, 9.209757, -11.901603, 9.287806, 13.013902, -8.039024, 13.458821)

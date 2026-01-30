@@ -1,13 +1,35 @@
 [gd_scene format=3 uid="uid://ckyi53hdl7i0w"]
 
-[ext_resource type="Texture2D" uid="uid://rt52kumtifcq" path="res://assets/rooms/room_01.jpeg" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://dd1ecls30doww" path="res://scenes/UI/UI_inventory.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://cxos1f2sgxmk4" path="res://scenes/main.gd" id="3_8q7j0"]
+[ext_resource type="Script" uid="uid://m0siol20exk7" path="res://scripts/bridge/FlagToDialogicBridge.gd" id="5_6w0c5"]
+[ext_resource type="Script" uid="uid://cl6bpfotchd5c" path="res://scripts/bridge/FlagDelayBridge.gd" id="6_0g4m8"]
 
 [node name="main" type="Node2D" unique_id=427153664]
+script = ExtResource("3_8q7j0")
 
-[node name="bg_room01" type="Sprite2D" parent="." unique_id=1869576370]
-position = Vector2(960.375, 538.75)
-scale = Vector2(3.6045966, 3.5883336)
-texture = ExtResource("1_o5qli")
+[node name="FlagToDialogicBridge" type="Node" parent="." unique_id=517714781]
+script = ExtResource("5_6w0c5")
+mapping = {
+"ed_01_start": {
+"done_flag": "ed_01_done",
+"timeline": "res://dialogues/ed_01.dtl"
+},
+"op_01_start": {
+"done_flag": "op_01_done",
+"timeline": "res://dialogues/op_01.dtl"
+}
+}
+
+[node name="FlagDelayBridge" type="Node" parent="." unique_id=1662834308]
+script = ExtResource("6_0g4m8")
+mapping = {
+"delay_after_hs02_start": {
+"delay": 1.0,
+"done_flag": "delay_after_hs02_done"
+}
+}
+
+[node name="RoomRoot" type="Node2D" parent="." unique_id=1869576370]
 
 [node name="UI_inventory" parent="." unique_id=592469890 instance=ExtResource("2_0wfyh")]

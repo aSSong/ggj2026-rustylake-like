@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://c6p7m0r6f8b4a"]
+
+[ext_resource type="Script" uid="uid://dosrwybk4inhy" path="res://scripts/inventory/InventoryItem.gd" id="1_jyq5n"]
+[ext_resource type="Texture2D" uid="uid://bg6ncdh62pjxe" path="res://assets/items/genericItem_color_154.png" id="1_r1ghn"]
+
+[resource]
+script = ExtResource("1_jyq5n")
+key = "test_key"
+display_name = "测试钥匙"
+description = "这是一把用于测试背包系统的钥匙。"
+icon = ExtResource("1_r1ghn")
+inspect_image = ExtResource("1_r1ghn")
