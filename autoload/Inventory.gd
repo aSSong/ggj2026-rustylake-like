@@ -67,4 +67,3 @@ func select_item(key: String) -> void:
 		return
 	_selected_key = key
 	selection_changed.emit(_selected_key)
-

@@ -8,16 +8,11 @@ extends Node2D
 @export var visual_visible: bool = true
 @export var visual_modulate: Color = Color(1, 1, 1, 1)
 
-const _ConditionsScript := preload("res://scripts/hotspots/HotSpotConditions.gd")
-const _FeedbackScript := preload("res://scripts/hotspots/HotSpotFeedback.gd")
 const _StateScript := preload("res://scripts/hotspots/HotSpotState.gd")
-
-@export var actions: Array[Resource] = []
-@export var conditions: Resource
-@export var feedback: Resource
 
 @export var states: Array[Resource] = []
 @export var default_state: Resource
+@export var lifecycle: Resource
 
 @export var emit_when_blocked: bool = true
 @export var left_mouse_button_only: bool = true
@@ -36,10 +31,6 @@ func _ready() -> void:
 		_visual.visible = visual_visible
 		_visual.modulate = visual_modulate
 
-	if conditions == null:
-		conditions = _ConditionsScript.new()
-	if feedback == null:
-		feedback = _FeedbackScript.new()
 	if default_state == null and _StateScript:
 		# 可为空；为空则走旧的 actions/conditions/feedback
 		default_state = null
@@ -102,11 +93,31 @@ func _pick_active_state() -> Resource:
 
 	return default_state
 
+func _lifecycle_allows() -> Dictionary:
+	# 默认允许
+	if lifecycle == null or not lifecycle.has_method("get") or not bool(lifecycle.get("enabled")):
+		return {"spawn_ok": true, "destroy_now": false, "destroy_mode": 0}
+
+	var spawn_set: Resource = lifecycle.get("spawn_conditions")
+	var destroy_set: Resource = lifecycle.get("destroy_conditions")
+	var destroy_mode := int(lifecycle.get("destroy_mode"))
+
+	var spawn_ok := bool(_game_state.call("check_condition_set", spawn_set))
+	var destroy_now := bool(_game_state.call("check_condition_set", destroy_set))
+
+	return {"spawn_ok": spawn_ok, "destroy_now": destroy_now, "destroy_mode": destroy_mode}
+
 
 func _evaluate() -> Dictionary:
+	var life := _lifecycle_allows()
+	if bool(life.destroy_now):
+		return {"visible_ok": false, "interactable_ok": false, "destroy_now": true, "destroy_mode": int(life.destroy_mode)}
+	if not bool(life.spawn_ok):
+		return {"visible_ok": false, "interactable_ok": false, "destroy_now": false, "destroy_mode": int(life.destroy_mode)}
+
 	_active_state = _pick_active_state()
 
-	var use_conditions: Resource = conditions
+	var use_conditions: Resource = null
 	if _active_state != null and _active_state.has_method("get"):
 		var st_cond: Resource = _active_state.get("conditions")
 		if st_cond != null:
@@ -126,12 +137,26 @@ func _evaluate() -> Dictionary:
 	return {
 		"visible_ok": visible_ok,
 		"interactable_ok": interactable_ok,
+		"destroy_now": false,
+		"destroy_mode": int(life.destroy_mode),
 	}
 
 
 func _refresh() -> void:
 	var result := _evaluate()
-	visible = result.visible_ok
+	if bool(result.get("destroy_now", false)):
+		# 生命周期触发销毁/隐藏
+		var dm := int(result.get("destroy_mode", 0))
+		if dm == 1: # FREE
+			queue_free()
+			return
+		visible = false
+		if _area:
+			_area.set_deferred("monitoring", false)
+			_area.set_deferred("input_pickable", false)
+		return
+
+	visible = bool(result.visible_ok)
 
 	# 应用状态贴图（state.texture 优先，其次 visual_texture，其次原有 sprite texture）
 	if _visual:
@@ -173,9 +198,9 @@ func _on_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 
 
 func _build_payload(visible_ok: bool, interactable_ok: bool) -> Dictionary:
-	# state 覆盖旧 actions/feedback；未配置 state 则沿用旧字段
-	var use_actions: Array = actions
-	var use_feedback: Resource = feedback
+	# 仅使用 state 配置（默认字段已移除）
+	var use_actions: Array = []
+	var use_feedback: Resource = null
 	var state_id := ""
 	var dialog_timeline := ""
 	if _active_state != null and _active_state.has_method("get"):

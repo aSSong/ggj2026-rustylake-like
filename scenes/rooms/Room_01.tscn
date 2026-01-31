@@ -9,17 +9,7 @@
 [ext_resource type="Script" uid="uid://bw3h3uyqpgwpf" path="res://scripts/rooms/RoomController.gd" id="7_rc"]
 [ext_resource type="Script" uid="uid://biixp4urs4qxy" path="res://scripts/hotspots/HotSpotState.gd" id="8_state"]
 [ext_resource type="Script" uid="uid://c1ckjraaop767" path="res://scripts/hotspots/HotSpotAction.gd" id="9_action"]
-
-[sub_resource type="Resource" id="Resource_HS01_Interactable"]
-script = ExtResource("4_0xan3")
-requires_flags_all = PackedStringArray("flow_hs01_enabled")
-requires_flags_any = null
-requires_items = null
-forbids_flags = null
-
-[sub_resource type="Resource" id="Resource_HS01_Conditions"]
-script = ExtResource("3_3h5tv")
-interactable = SubResource("Resource_HS01_Interactable")
+[ext_resource type="Script" uid="uid://ker6421hugph" path="res://scripts/hotspots/HotSpotLifecycle.gd" id="10_life"]
 
 [sub_resource type="Resource" id="Resource_HS01_ActionPickup"]
 script = ExtResource("9_action")
@@ -31,51 +21,105 @@ params = {
 
 [sub_resource type="Resource" id="Resource_HS01_ActionDone"]
 script = ExtResource("9_action")
-type = 5
+type = 6
 params = {
 "name": "hs_01_done",
 "value": true
 }
 
-[sub_resource type="Resource" id="Resource_37ggs"]
-script = ExtResource("9_action")
-type = 6
-metadata/_custom_type_script = "uid://c1ckjraaop767"
+[sub_resource type="Resource" id="Resource_HS01_Interactable"]
+script = ExtResource("4_0xan3")
+requires_flags_all = PackedStringArray()
+requires_flags_any = null
+requires_items = null
+forbids_flags = null
+
+[sub_resource type="Resource" id="Resource_HS01_Conditions"]
+script = ExtResource("3_3h5tv")
+interactable = SubResource("Resource_HS01_Interactable")
 
 [sub_resource type="Resource" id="Resource_HS01_State"]
 script = ExtResource("8_state")
 state_id = "enabled"
 conditions = SubResource("Resource_HS01_Conditions")
 texture = ExtResource("3_mtqkf")
-click_dialog_timeline = "uid://dwfx18ehbg6lo"
-actions = Array[Resource]([SubResource("Resource_HS01_ActionPickup"), SubResource("Resource_HS01_ActionDone"), SubResource("Resource_37ggs")])
+click_dialog_timeline = "uid://cua4plv838vc4"
+actions = Array[Resource]([SubResource("Resource_HS01_ActionPickup"), SubResource("Resource_HS01_ActionDone")])
 
-[sub_resource type="Resource" id="Resource_HS02_Interactable"]
+[sub_resource type="Resource" id="Resource_HS01_Destroy"]
 script = ExtResource("4_0xan3")
-requires_flags_all = PackedStringArray("flow_hs02_enabled")
+requires_flags_all = PackedStringArray("hs_01_done")
 requires_flags_any = null
 requires_items = null
 forbids_flags = null
 
-[sub_resource type="Resource" id="Resource_HS02_Conditions"]
-script = ExtResource("3_3h5tv")
-interactable = SubResource("Resource_HS02_Interactable")
+[sub_resource type="Resource" id="Resource_HS01_Spawn"]
+script = ExtResource("4_0xan3")
+requires_flags_all = PackedStringArray("hs_02_done")
+requires_flags_any = null
+requires_items = null
+forbids_flags = null
+
+[sub_resource type="Resource" id="Resource_HS01_Lifecycle"]
+script = ExtResource("10_life")
+spawn_conditions = SubResource("Resource_HS01_Spawn")
+destroy_conditions = SubResource("Resource_HS01_Destroy")
 
 [sub_resource type="Resource" id="Resource_HS02_ActionDone"]
 script = ExtResource("9_action")
-type = 5
+type = 6
 params = {
 "name": "hs_02_done",
 "value": true
 }
+
+[sub_resource type="Resource" id="Resource_HS02_Interactable"]
+script = ExtResource("4_0xan3")
+requires_flags_all = PackedStringArray()
+requires_flags_any = null
+requires_items = null
+forbids_flags = null
+
+[sub_resource type="Resource" id="Resource_HS02_Visible"]
+script = ExtResource("4_0xan3")
+requires_flags_all = null
+requires_flags_any = null
+requires_items = null
+forbids_flags = PackedStringArray("hs_02_done")
+
+[sub_resource type="Resource" id="Resource_HS02_Conditions"]
+script = ExtResource("3_3h5tv")
+visible = SubResource("Resource_HS02_Visible")
+interactable = SubResource("Resource_HS02_Interactable")
 
 [sub_resource type="Resource" id="Resource_HS02_State"]
 script = ExtResource("8_state")
 state_id = "enabled"
 conditions = SubResource("Resource_HS02_Conditions")
 texture = ExtResource("6_a71us")
-blocked_dialog_timeline = "uid://dei4i0puynrq3"
 actions = Array[Resource]([SubResource("Resource_HS02_ActionDone")])
+
+[sub_resource type="Resource" id="Resource_ib1pk"]
+script = ExtResource("4_0xan3")
+requires_flags_all = PackedStringArray("hs_02_done")
+requires_flags_any = null
+requires_items = null
+forbids_flags = null
+metadata/_custom_type_script = "uid://b8lw6xwksp2rg"
+
+[sub_resource type="Resource" id="Resource_af2no"]
+script = ExtResource("4_0xan3")
+requires_flags_all = PackedStringArray("op_01_done")
+requires_flags_any = null
+requires_items = null
+forbids_flags = null
+metadata/_custom_type_script = "uid://b8lw6xwksp2rg"
+
+[sub_resource type="Resource" id="Resource_csf3q"]
+script = ExtResource("10_life")
+spawn_conditions = SubResource("Resource_af2no")
+destroy_conditions = SubResource("Resource_ib1pk")
+metadata/_custom_type_script = "uid://ker6421hugph"
 
 [node name="Room_01" type="Node2D" unique_id=765094737]
 
@@ -91,8 +135,8 @@ texture = ExtResource("1_o5qli")
 position = Vector2(960, 540)
 hotspot_id = "HS_01"
 visual_texture = ExtResource("3_mtqkf")
-conditions = SubResource("Resource_HS01_Conditions")
 states = Array[Resource]([SubResource("Resource_HS01_State")])
+lifecycle = SubResource("Resource_HS01_Lifecycle")
 
 [node name="Sprite2D" parent="HS_01" index="0" unique_id=988138504]
 texture = ExtResource("3_mtqkf")
@@ -100,8 +144,8 @@ texture = ExtResource("3_mtqkf")
 [node name="HS_02" parent="." unique_id=586662335 instance=ExtResource("2_oyc2o")]
 position = Vector2(1290, 540)
 hotspot_id = "HS_02"
-conditions = SubResource("Resource_HS02_Conditions")
 states = Array[Resource]([SubResource("Resource_HS02_State")])
+lifecycle = SubResource("Resource_csf3q")
 
 [node name="Sprite2D" parent="HS_02" index="0" unique_id=988138504]
 texture = ExtResource("6_a71us")
