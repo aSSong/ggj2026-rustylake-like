@@ -431,9 +431,23 @@ static func setup_script_property_edit_node(property_info: Dictionary, value:Var
 			if property_info["hint"] & PROPERTY_HINT_ENUM == PROPERTY_HINT_ENUM:
 				input = OptionButton.new()
 				var idx := 0
-				for x in property_info["hint_string"].split(","):
-					input.add_item(x.split(":")[0])
-					var id := int(x.split(":")[1])
+				for raw in property_info["hint_string"].split(","):
+					var entry := str(raw).strip_edges()
+					if entry.is_empty():
+						continue
+
+					var parts: PackedStringArray = entry.split(":", false, 2)
+					var label := parts[0].strip_edges()
+
+					# Godot 常见格式是 "A,B,C"（没有冒号），此时值就是索引 0,1,2...
+					# 另一种格式是 "A:1,B:2"（有显式 int 值）。
+					var id := idx
+					if parts.size() > 1:
+						var rhs := parts[1].strip_edges()
+						if rhs.is_valid_int():
+							id = int(rhs)
+
+					input.add_item(label)
 					input.set_item_metadata(idx, id)
 					if value == id:
 						input.select(idx)
