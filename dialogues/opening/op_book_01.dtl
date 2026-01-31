@@ -1,0 +1,14 @@
+[style name="dialog_style_w"]
+[wait time="1.0"]
+[background arg="res://assets/UI/img_book_01.png" fade="0.5"]
+[wait time="1.0"]
+我在一个神秘的地方，发现了这本笔记
+这本笔记埋藏在非常隐秘的地方
+似乎永远都不想被人发现
+[background arg="res://assets/UI/img_book_02.png" fade="0.5" transition="Simple Fade"]
+这里面记载着一场冒险
+一场似乎永远都不想被人知道的冒险
+冒险是这样的……
+[wait time="1.0"]
+[background fade="0.0"]
+do SceneFlow.goto_room("map")

@@ -132,4 +132,3 @@ func _execute_action(action: Dictionary, payload: Dictionary) -> void:
 		_:
 			# examine/open_puzzle 等留给后续扩展
 			pass
-

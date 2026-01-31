@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dumi5fjoqg7ih"]
+
+[ext_resource type="Script" uid="uid://bll2rl57045no" path="res://scripts/rooms/room_02.gd" id="1_mqghc"]
+[ext_resource type="Texture2D" uid="uid://dpiqqriqk58yt" path="res://assets/rooms/img_room_02.jpg" id="1_s0u8b"]
+
+[node name="room_02" type="Node2D" unique_id=1046978117]
+script = ExtResource("1_mqghc")
+
+[node name="bg" type="TextureRect" parent="." unique_id=677218892]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_s0u8b")

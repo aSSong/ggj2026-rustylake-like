@@ -1,87 +1,75 @@
 [gd_resource type="Resource" script_class="FlowGraph" format=3 uid="uid://c5q1t6c1e8x0w"]
 
-[ext_resource type="Script" path="res://scripts/flow/FlowGraph.gd" id="1_kc6xj"]
-[ext_resource type="Script" path="res://scripts/flow/FlowStep.gd" id="2_6x0j1"]
-[ext_resource type="Script" path="res://scripts/flow/FlowAction.gd" id="3_qbq4o"]
+[ext_resource type="Script" uid="uid://mswlhlt6l1xn" path="res://scripts/flow/FlowGraph.gd" id="1_kc6xj"]
+[ext_resource type="Script" uid="uid://dyciv7qdjh7f4" path="res://scripts/flow/FlowStep.gd" id="2_6x0j1"]
+[ext_resource type="Script" uid="uid://c041uph2avskh" path="res://scripts/flow/FlowAction.gd" id="3_qbq4o"]
 
 [sub_resource type="Resource" id="Resource_StartOP01"]
 script = ExtResource("3_qbq4o")
-type = 0
 flag_name = "op_01_start"
-flag_value = true
-
-[sub_resource type="Resource" id="Resource_StartDelayAfterHS02"]
-script = ExtResource("3_qbq4o")
-type = 0
-flag_name = "delay_after_hs02_start"
-flag_value = true
-
-[sub_resource type="Resource" id="Resource_StartED01"]
-script = ExtResource("3_qbq4o")
-type = 0
-flag_name = "ed_01_start"
-flag_value = true
-
-[sub_resource type="Resource" id="Resource_EnableHS01"]
-script = ExtResource("3_qbq4o")
-type = 0
-flag_name = "flow_hs01_enabled"
-flag_value = true
-
-[sub_resource type="Resource" id="Resource_DisableHS01"]
-script = ExtResource("3_qbq4o")
-type = 0
-flag_name = "flow_hs01_enabled"
-flag_value = false
-
-[sub_resource type="Resource" id="Resource_EnableHS02"]
-script = ExtResource("3_qbq4o")
-type = 0
-flag_name = "flow_hs02_enabled"
-flag_value = true
-
-[sub_resource type="Resource" id="Resource_DisableHS02"]
-script = ExtResource("3_qbq4o")
-type = 0
-flag_name = "flow_hs02_enabled"
-flag_value = false
-
-[sub_resource type="Resource" id="Resource_SetCompleted"]
-script = ExtResource("3_qbq4o")
-type = 0
-flag_name = "game_completed"
-flag_value = true
 
 [sub_resource type="Resource" id="Resource_StepOP01"]
 script = ExtResource("2_6x0j1")
 step_id = "Step_OP01"
 thread_id = "room_01"
 description = "进入房间播放 op_01（设置 op_01_start，等待 op_01_done）"
-on_enter_actions = Array[Resource]([SubResource("Resource_StartOP01")])
+enable_flags_all = null
+enable_flags_any = null
+enable_forbids_flags = null
 complete_flags_all = PackedStringArray("op_01_done")
+complete_flags_any = null
+on_enter_actions = Array[Resource]([SubResource("Resource_StartOP01")])
 next_ids = PackedStringArray("Step_HS01")
+
+[sub_resource type="Resource" id="Resource_DisableHS01"]
+script = ExtResource("3_qbq4o")
+flag_name = "flow_hs01_enabled"
+flag_value = false
+
+[sub_resource type="Resource" id="Resource_EnableHS01"]
+script = ExtResource("3_qbq4o")
+flag_name = "flow_hs01_enabled"
 
 [sub_resource type="Resource" id="Resource_StepHS01"]
 script = ExtResource("2_6x0j1")
 step_id = "Step_HS01"
 thread_id = "room_01"
 description = "解锁 HS_01，等待点击完成（hs_01_done）"
-on_enter_actions = Array[Resource]([SubResource("Resource_EnableHS01")])
 enable_flags_all = PackedStringArray("Step_OP01_completed")
+enable_flags_any = null
+enable_forbids_flags = null
 complete_flags_all = PackedStringArray("hs_01_done")
+complete_flags_any = null
+on_enter_actions = Array[Resource]([SubResource("Resource_EnableHS01")])
 on_complete_actions = Array[Resource]([SubResource("Resource_DisableHS01")])
 next_ids = PackedStringArray("Step_HS02")
+
+[sub_resource type="Resource" id="Resource_DisableHS02"]
+script = ExtResource("3_qbq4o")
+flag_name = "flow_hs02_enabled"
+flag_value = false
+
+[sub_resource type="Resource" id="Resource_EnableHS02"]
+script = ExtResource("3_qbq4o")
+flag_name = "flow_hs02_enabled"
 
 [sub_resource type="Resource" id="Resource_StepHS02"]
 script = ExtResource("2_6x0j1")
 step_id = "Step_HS02"
 thread_id = "room_01"
 description = "解锁 HS_02，等待点击完成（hs_02_done）"
-on_enter_actions = Array[Resource]([SubResource("Resource_EnableHS02")])
 enable_flags_all = PackedStringArray("Step_HS01_completed")
+enable_flags_any = null
+enable_forbids_flags = null
 complete_flags_all = PackedStringArray("hs_02_done")
+complete_flags_any = null
+on_enter_actions = Array[Resource]([SubResource("Resource_EnableHS02")])
 on_complete_actions = Array[Resource]([SubResource("Resource_DisableHS02")])
 next_ids = PackedStringArray("Step_DelayAfterHS02")
+
+[sub_resource type="Resource" id="Resource_StartDelayAfterHS02"]
+script = ExtResource("3_qbq4o")
+flag_name = "delay_after_hs02_start"
 
 [sub_resource type="Resource" id="Resource_StepDelayAfterHS02"]
 script = ExtResource("2_6x0j1")
@@ -89,9 +77,16 @@ step_id = "Step_DelayAfterHS02"
 thread_id = "room_01"
 description = "延迟 1 秒后进入 ed_01（设置 delay_after_hs02_start，等待 delay_after_hs02_done）"
 enable_flags_all = PackedStringArray("Step_HS02_completed")
-on_enter_actions = Array[Resource]([SubResource("Resource_StartDelayAfterHS02")])
+enable_flags_any = null
+enable_forbids_flags = null
 complete_flags_all = PackedStringArray("delay_after_hs02_done")
+complete_flags_any = null
+on_enter_actions = Array[Resource]([SubResource("Resource_StartDelayAfterHS02")])
 next_ids = PackedStringArray("Step_ED01")
+
+[sub_resource type="Resource" id="Resource_StartED01"]
+script = ExtResource("3_qbq4o")
+flag_name = "ed_01_start"
 
 [sub_resource type="Resource" id="Resource_StepED01"]
 script = ExtResource("2_6x0j1")
@@ -99,9 +94,16 @@ step_id = "Step_ED01"
 thread_id = "room_01"
 description = "播放 ed_01（设置 ed_01_start，等待 ed_01_done）"
 enable_flags_all = PackedStringArray("Step_DelayAfterHS02_completed")
-on_enter_actions = Array[Resource]([SubResource("Resource_StartED01")])
+enable_flags_any = null
+enable_forbids_flags = null
 complete_flags_all = PackedStringArray("ed_01_done")
+complete_flags_any = null
+on_enter_actions = Array[Resource]([SubResource("Resource_StartED01")])
 next_ids = PackedStringArray("End")
+
+[sub_resource type="Resource" id="Resource_SetCompleted"]
+script = ExtResource("3_qbq4o")
+flag_name = "game_completed"
 
 [sub_resource type="Resource" id="Resource_End"]
 script = ExtResource("2_6x0j1")
@@ -109,19 +111,15 @@ step_id = "End"
 thread_id = "room_01"
 description = "房间通关：设置 game_completed"
 enable_flags_all = PackedStringArray("Step_ED01_completed")
+enable_flags_any = null
+enable_forbids_flags = null
 complete_flags_all = PackedStringArray("game_completed")
+complete_flags_any = null
 on_enter_actions = Array[Resource]([SubResource("Resource_SetCompleted")])
+next_ids = null
 
 [resource]
 script = ExtResource("1_kc6xj")
 graph_id = "room_01_flow"
 start_step_ids = PackedStringArray("Step_OP01")
-steps = Array[Resource]([
-SubResource("Resource_StepOP01"),
-SubResource("Resource_StepHS01"),
-SubResource("Resource_StepHS02"),
-SubResource("Resource_StepDelayAfterHS02"),
-SubResource("Resource_StepED01"),
-SubResource("Resource_End")
-])
-
+steps = Array[Resource]([SubResource("Resource_StepOP01"), SubResource("Resource_StepHS01"), SubResource("Resource_StepHS02"), SubResource("Resource_StepDelayAfterHS02"), SubResource("Resource_StepED01"), SubResource("Resource_End")])

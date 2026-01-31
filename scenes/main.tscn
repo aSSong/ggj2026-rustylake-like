@@ -7,6 +7,7 @@
 
 [node name="main" type="Node2D" unique_id=427153664]
 script = ExtResource("3_8q7j0")
+metadata/_edit_vertical_guides_ = [-885.0]
 
 [node name="FlagToDialogicBridge" type="Node" parent="." unique_id=517714781]
 script = ExtResource("5_6w0c5")

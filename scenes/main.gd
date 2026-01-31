@@ -24,4 +24,3 @@ func _ready() -> void:
 func _on_hotspot_action(payload: Dictionary) -> void:
 	if print_hotspot_payload:
 		print(payload)
-

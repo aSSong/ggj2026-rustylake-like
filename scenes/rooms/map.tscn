@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bryub1y3qyaky"]
+
+[ext_resource type="Script" uid="uid://crfden11n6h1y" path="res://scripts/rooms/map.gd" id="1_3l7wm"]
+[ext_resource type="Texture2D" uid="uid://dqoi3e20ymtsh" path="res://assets/rooms/img_map.jpg" id="1_86j5a"]
+
+[node name="map" type="Node2D" unique_id=1460502701]
+script = ExtResource("1_3l7wm")
+
+[node name="bg" type="TextureRect" parent="." unique_id=373452353]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_86j5a")

@@ -10,8 +10,9 @@ config_version=5
 
 [application]
 
-config/name="A-normal-room"
-run/main_scene="uid://ckyi53hdl7i0w"
+config/name="A-Masked-Advantrue"
+config/version="0.1"
+run/main_scene="uid://csab15c3e6cu0"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://ceike3ch1bdax"
 
@@ -28,20 +29,29 @@ Inventory="*res://autoload/Inventory.gd"
 
 directories/dch_directory={
 "player": "res://dialogues/player.dch",
-"unit_test_character": "res://Tests/Resources/unit_test_character.dch"
+"unit_test_character": "res://Tests/Resources/unit_test_character.dch",
+"unkown": "res://dialogues/unkown.dch"
 }
 directories/dtl_directory={
-"dialogues/ed_01": "res://dialogues/ed_01.dtl",
+"ed_01": "res://dialogues/ed_01.dtl",
+"map_01": "res://dialogues/map/map_01.dtl",
 "op_01": "res://dialogues/op_01.dtl",
+"op_book_01": "res://dialogues/opening/op_book_01.dtl",
+"remnant_door_01": "res://dialogues/remnant_door/remnant_door_01.dtl",
+"room_02_01": "res://dialogues/room_02/room_02_01.dtl",
+"room_03_01": "res://dialogues/room_03/room_03_01.dtl",
+"room_04_01": "res://dialogues/room_04/room_04_01.dtl",
+"room_05_01": "res://dialogues/room_05/room_05_01.dtl",
 "test_book_block": "res://dialogues/getitems/test_book_block.dtl",
 "test_book_click": "res://dialogues/getitems/test_book_click.dtl",
 "test_key_get": "res://dialogues/getitems/test_key_get.dtl"
 }
 layout/style_directory={
 "": "res://dialogues/dialog_style.tres",
-"dialog_style": "res://dialogues/dialog_style.tres"
+"dialog_style": "res://dialogues/dialog_style.tres",
+"style1": "res://dialogues/style1.tres"
 }
-layout/style_list=["res://dialogues/dialog_style.tres"]
+layout/style_list=["res://dialogues/dialog_style.tres", "res://dialogues/style1.tres"]
 layout/default_style="res://dialogues/dialog_style.tres"
 variables={}
 glossary/default_case_sensitive=true
@@ -108,3 +118,4 @@ dialogic_default_action={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
