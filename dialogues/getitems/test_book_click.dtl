@@ -1,1 +1,3 @@
 这有一本神秘的书
+不管了，先拿着吧
+do GameState.set_flag("hs_02_done")

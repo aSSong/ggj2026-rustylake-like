@@ -19,13 +19,10 @@ params = {
 "item_key": "test_key"
 }
 
-[sub_resource type="Resource" id="Resource_HS01_ActionDone"]
+[sub_resource type="Resource" id="Resource_7gcwb"]
 script = ExtResource("9_action")
-type = 6
-params = {
-"name": "hs_01_done",
-"value": true
-}
+type = 1
+metadata/_custom_type_script = "uid://c1ckjraaop767"
 
 [sub_resource type="Resource" id="Resource_HS01_Interactable"]
 script = ExtResource("4_0xan3")
@@ -43,8 +40,8 @@ script = ExtResource("8_state")
 state_id = "enabled"
 conditions = SubResource("Resource_HS01_Conditions")
 texture = ExtResource("3_mtqkf")
-click_dialog_timeline = "uid://cua4plv838vc4"
-actions = Array[Resource]([SubResource("Resource_HS01_ActionPickup"), SubResource("Resource_HS01_ActionDone")])
+click_dialog_timeline = "uid://dwfx18ehbg6lo"
+actions = Array[Resource]([SubResource("Resource_HS01_ActionPickup"), SubResource("Resource_7gcwb")])
 
 [sub_resource type="Resource" id="Resource_HS01_Destroy"]
 script = ExtResource("4_0xan3")
@@ -64,14 +61,6 @@ forbids_flags = null
 script = ExtResource("10_life")
 spawn_conditions = SubResource("Resource_HS01_Spawn")
 destroy_conditions = SubResource("Resource_HS01_Destroy")
-
-[sub_resource type="Resource" id="Resource_HS02_ActionDone"]
-script = ExtResource("9_action")
-type = 6
-params = {
-"name": "hs_02_done",
-"value": true
-}
 
 [sub_resource type="Resource" id="Resource_HS02_Interactable"]
 script = ExtResource("4_0xan3")
@@ -97,7 +86,7 @@ script = ExtResource("8_state")
 state_id = "enabled"
 conditions = SubResource("Resource_HS02_Conditions")
 texture = ExtResource("6_a71us")
-actions = Array[Resource]([SubResource("Resource_HS02_ActionDone")])
+click_dialog_timeline = "uid://cua4plv838vc4"
 
 [sub_resource type="Resource" id="Resource_ib1pk"]
 script = ExtResource("4_0xan3")

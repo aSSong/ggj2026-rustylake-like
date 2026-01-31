@@ -1,1 +1,3 @@
 先去点点钥匙
+不管了，先拿着吧
+do GameState.set_flag("hs_02_done")

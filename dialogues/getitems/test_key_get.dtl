@@ -1,1 +1,3 @@
 这有一把神秘的钥匙
+估计是大门钥匙吧
+do GameState.set_flag("hs_01_done")
