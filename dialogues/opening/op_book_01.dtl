@@ -1,4 +1,4 @@
-[style name="dialog_style_w"]
+[style name="style1"]
 [wait time="1.0"]
 [background arg="res://assets/UI/img_book_01.png" fade="0.5"]
 [wait time="1.0"]

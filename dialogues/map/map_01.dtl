@@ -1,8 +1,8 @@
 [style name="dialog_style"]
 [wait time="1.0"]
-unkown: 我花费了毕生的积蓄，终于集齐了所有的碎片
-unkown: 这是通往克拉神迹地图
-unkown: 那个人们以为只存在于传说中的地方
-unkown: 那传说中的宝藏，我来啦……
+我花费了毕生的积蓄，终于集齐了所有的碎片
+这是通往克拉神迹地图
+那个人们以为只存在于传说中的地方
+那传说中的宝藏，我来啦……
 [wait time="1.0"]
 do SceneFlow.goto_room("remnant_door")
