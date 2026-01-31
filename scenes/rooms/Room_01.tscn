@@ -19,11 +19,6 @@ params = {
 "item_key": "test_key"
 }
 
-[sub_resource type="Resource" id="Resource_7gcwb"]
-script = ExtResource("9_action")
-type = 1
-metadata/_custom_type_script = "uid://c1ckjraaop767"
-
 [sub_resource type="Resource" id="Resource_HS01_Interactable"]
 script = ExtResource("4_0xan3")
 requires_flags_all = PackedStringArray()
@@ -41,7 +36,7 @@ state_id = "enabled"
 conditions = SubResource("Resource_HS01_Conditions")
 texture = ExtResource("3_mtqkf")
 click_dialog_timeline = "uid://dwfx18ehbg6lo"
-actions = Array[Resource]([SubResource("Resource_HS01_ActionPickup"), SubResource("Resource_7gcwb")])
+actions = Array[Resource]([SubResource("Resource_HS01_ActionPickup")])
 
 [sub_resource type="Resource" id="Resource_HS01_Destroy"]
 script = ExtResource("4_0xan3")
