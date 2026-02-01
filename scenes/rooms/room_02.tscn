@@ -4,16 +4,259 @@
 [ext_resource type="Texture2D" uid="uid://ju15jb0qong0" path="res://assets/rooms/room_02_01.png" id="2_mqghc"]
 [ext_resource type="PackedScene" uid="uid://6ssdi1ey4jp7" path="res://scenes/HotSpotArea.tscn" id="3_fnk50"]
 [ext_resource type="Script" uid="uid://biixp4urs4qxy" path="res://scripts/hotspots/HotSpotState.gd" id="4_qd0q8"]
+[ext_resource type="Script" uid="uid://c1ckjraaop767" path="res://scripts/hotspots/HotSpotAction.gd" id="5_jk4q7"]
 [ext_resource type="Texture2D" uid="uid://nbbaetvah5ti" path="res://assets/rooms/room_02_chair.png" id="5_vcnne"]
+[ext_resource type="Script" uid="uid://d14xt8x4u4i3p" path="res://scripts/hotspots/HotSpotConditions.gd" id="6_cond"]
+[ext_resource type="Script" uid="uid://b8lw6xwksp2rg" path="res://scripts/hotspots/HotSpotConditionSet.gd" id="7_cset"]
+[ext_resource type="Script" uid="uid://bw3h3uyqpgwpf" path="res://scripts/rooms/RoomController.gd" id="8_rc"]
+[ext_resource type="PackedScene" uid="uid://dd1ecls30doww" path="res://scenes/UI/UI_inventory.tscn" id="10_ckh05"]
 
-[sub_resource type="Resource" id="Resource_0e81w"]
+[sub_resource type="Resource" id="Resource_HSCrack_BaseInteractable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_door_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_HSCrack_BaseVisible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_door_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_HSCrack_BaseConditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_HSCrack_BaseVisible")
+interactable = SubResource("Resource_HSCrack_BaseInteractable")
+
+[sub_resource type="Resource" id="Resource_ckh05"]
+script = ExtResource("5_jk4q7")
+type = 1
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Crack_S2_Interactable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("chair_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_Crack_S2_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("chair_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_Crack_S2_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Crack_S2_Visible")
+interactable = SubResource("Resource_Crack_S2_Interactable")
+
+[sub_resource type="Resource" id="Resource_Crack_S2_State"]
 script = ExtResource("4_qd0q8")
-state_id = "default"
+state_id = "crack_2"
+priority = 10
+conditions = SubResource("Resource_Crack_S2_Conditions")
+click_dialog_timeline = "crack_getkey"
+actions = Array[Resource]([SubResource("Resource_ckh05")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Crack_S1_Interactable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_door_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_Crack_S1_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_door_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_Crack_S1_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Crack_S1_Visible")
+interactable = SubResource("Resource_Crack_S1_Interactable")
+
+[sub_resource type="Resource" id="Resource_Crack_S1_State"]
+script = ExtResource("4_qd0q8")
+state_id = "crack_1"
+conditions = SubResource("Resource_Crack_S1_Conditions")
+click_dialog_timeline = "crack_01"
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_HSChair_BaseInteractable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("crack_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("chair_clicked")
+
+[sub_resource type="Resource" id="Resource_HSChair_BaseVisible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("chair_clicked")
+
+[sub_resource type="Resource" id="Resource_HSChair_BaseConditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_HSChair_BaseVisible")
+interactable = SubResource("Resource_HSChair_BaseInteractable")
+
+[sub_resource type="Resource" id="Resource_Chair_S1_Interactable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("crack_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("chair_clicked")
+
+[sub_resource type="Resource" id="Resource_Chair_S1_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("crack_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("chair_clicked")
+
+[sub_resource type="Resource" id="Resource_Chair_S1_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Chair_S1_Visible")
+interactable = SubResource("Resource_Chair_S1_Interactable")
+
+[sub_resource type="Resource" id="Resource_Chair_S1_State"]
+script = ExtResource("4_qd0q8")
+state_id = "chair_1"
+conditions = SubResource("Resource_Chair_S1_Conditions")
+texture = ExtResource("5_vcnne")
+click_dialog_timeline = "chair_01"
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_HSLock_BaseInteractable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_op_done")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_HSLock_BaseVisible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_op_done")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_HSLock_BaseConditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_HSLock_BaseVisible")
+interactable = SubResource("Resource_HSLock_BaseInteractable")
+
+[sub_resource type="Resource" id="Resource_Lock_S2_Interactable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_keyget")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Lock_S2_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_keyget")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Lock_S2_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Lock_S2_Visible")
+interactable = SubResource("Resource_Lock_S2_Interactable")
+
+[sub_resource type="Resource" id="Resource_Lock_S2_State"]
+script = ExtResource("4_qd0q8")
+state_id = "lock_2"
+priority = 10
+conditions = SubResource("Resource_Lock_S2_Conditions")
+click_dialog_timeline = "room_02_door_open"
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Lock_S1_Interactable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_op_done")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_Lock_S1_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room02_op_done")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room02_keyget")
+
+[sub_resource type="Resource" id="Resource_Lock_S1_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Lock_S1_Visible")
+interactable = SubResource("Resource_Lock_S1_Interactable")
+
+[sub_resource type="Resource" id="Resource_Lock_S1_State"]
+script = ExtResource("4_qd0q8")
+state_id = "lock_1"
+conditions = SubResource("Resource_Lock_S1_Conditions")
+click_dialog_timeline = "room_02_door_01"
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_HSChair02_BaseInteractable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("chair_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_HSChair02_BaseVisible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("chair_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_HSChair02_BaseConditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_HSChair02_BaseVisible")
+interactable = SubResource("Resource_HSChair02_BaseInteractable")
+
+[sub_resource type="Resource" id="Resource_Chair02_Interactable"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Chair02_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("chair_clicked")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Chair02_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Chair02_Visible")
+interactable = SubResource("Resource_Chair02_Interactable")
+
+[sub_resource type="Resource" id="Resource_Chair02_State"]
+script = ExtResource("4_qd0q8")
+state_id = "chair02_show"
+conditions = SubResource("Resource_Chair02_Conditions")
 texture = ExtResource("5_vcnne")
 metadata/_custom_type_script = "uid://biixp4urs4qxy"
 
 [node name="room_02" type="Node2D" unique_id=1046978117]
 script = ExtResource("1_mqghc")
+
+[node name="RoomController" type="Node" parent="." unique_id=862273180]
+script = ExtResource("8_rc")
 
 [node name="bg" type="TextureRect" parent="." unique_id=677218892]
 offset_right = 1920.0
@@ -22,13 +265,16 @@ texture = ExtResource("2_mqghc")
 
 [node name="HS_crack" parent="." unique_id=1752983682 instance=ExtResource("3_fnk50")]
 position = Vector2(1558, 225)
+conditions = SubResource("Resource_HSCrack_BaseConditions")
+states = Array[Resource]([SubResource("Resource_Crack_S2_State"), SubResource("Resource_Crack_S1_State")])
 
 [node name="Sprite2D" parent="HS_crack" index="0" unique_id=988138504]
 texture = null
 
 [node name="HS_chair" parent="." unique_id=1119244311 instance=ExtResource("3_fnk50")]
 position = Vector2(1463, 702)
-states = Array[Resource]([SubResource("Resource_0e81w")])
+conditions = SubResource("Resource_HSChair_BaseConditions")
+states = Array[Resource]([SubResource("Resource_Chair_S1_State")])
 
 [node name="Sprite2D" parent="HS_chair" index="0" unique_id=988138504]
 position = Vector2(28, 46)
@@ -41,6 +287,8 @@ polygon = PackedVector2Array(-11.395126, -4.7828903, -1.5609818, -7.8973236, -1.
 
 [node name="HS_lock" parent="." unique_id=934304806 instance=ExtResource("3_fnk50")]
 position = Vector2(969, 471)
+conditions = SubResource("Resource_HSLock_BaseConditions")
+states = Array[Resource]([SubResource("Resource_Lock_S2_State"), SubResource("Resource_Lock_S1_State")])
 
 [node name="Sprite2D" parent="HS_lock" index="0" unique_id=988138504]
 texture = null
@@ -49,11 +297,16 @@ texture = null
 polygon = PackedVector2Array(-12.721947, -24.025667, -0.23414612, -32.701603, 12.253662, -23.135828, 12.253662, 12.012833, -13.658535, 12.235291)
 
 [node name="HS_chair_02" parent="." unique_id=981615333 instance=ExtResource("3_fnk50")]
+visible = false
 position = Vector2(1560, 620)
+conditions = SubResource("Resource_HSChair02_BaseConditions")
+states = Array[Resource]([SubResource("Resource_Chair02_State")])
 
 [node name="Sprite2D" parent="HS_chair_02" index="0" unique_id=988138504]
 scale = Vector2(0.46, 0.46)
 texture = ExtResource("5_vcnne")
+
+[node name="UI_inventory" parent="." unique_id=592469890 instance=ExtResource("10_ckh05")]
 
 [editable path="HS_crack"]
 [editable path="HS_chair"]
