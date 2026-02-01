@@ -2,11 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bicnh244cru2r" path="res://scripts/UI/ui_op_01.gd" id="1_akfby"]
 
-[node name="op_01" type="Control" unique_id=484606685]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="op_01" type="Node2D" unique_id=987369704]
 script = ExtResource("1_akfby")

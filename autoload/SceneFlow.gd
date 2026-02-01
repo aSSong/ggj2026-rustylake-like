@@ -18,10 +18,10 @@ var _room_registry: Dictionary = {
 	"main": "res://scenes/main.tscn",
 	"map":"res://scenes/rooms/map.tscn",
 	"remnant_door":"res://scenes/rooms/remnant_door.tscn",
-	"room_02": "res://scenes/rooms/Room_02.tscn",
-	"room_03": "res://scenes/rooms/Room_03.tscn",
-	"room_04": "res://scenes/rooms/Room_04.tscn",
-	"room_05": "res://scenes/rooms/Room_05.tscn",
+	"room_02": "res://scenes/rooms/room_02.tscn",
+	"room_03": "res://scenes/rooms/room_03.tscn",
+	"room_04": "res://scenes/rooms/room_04.tscn",
+	"room_05": "res://scenes/rooms/room_05.tscn",
 	"maintitle": "res://scenes/UI/maintitle.tscn",
 
 }
