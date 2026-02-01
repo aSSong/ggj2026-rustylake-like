@@ -1,7 +1,16 @@
 [gd_scene format=3 uid="uid://dumi5fjoqg7ih"]
 
 [ext_resource type="Script" uid="uid://bll2rl57045no" path="res://scripts/rooms/room_02.gd" id="1_mqghc"]
-[ext_resource type="Texture2D" uid="uid://dpiqqriqk58yt" path="res://assets/rooms/img_room_02.jpg" id="1_s0u8b"]
+[ext_resource type="Texture2D" uid="uid://ju15jb0qong0" path="res://assets/rooms/room_02_01.png" id="2_mqghc"]
+[ext_resource type="PackedScene" uid="uid://6ssdi1ey4jp7" path="res://scenes/HotSpotArea.tscn" id="3_fnk50"]
+[ext_resource type="Script" uid="uid://biixp4urs4qxy" path="res://scripts/hotspots/HotSpotState.gd" id="4_qd0q8"]
+[ext_resource type="Texture2D" uid="uid://nbbaetvah5ti" path="res://assets/rooms/room_02_chair.png" id="5_vcnne"]
+
+[sub_resource type="Resource" id="Resource_0e81w"]
+script = ExtResource("4_qd0q8")
+state_id = "default"
+texture = ExtResource("5_vcnne")
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
 
 [node name="room_02" type="Node2D" unique_id=1046978117]
 script = ExtResource("1_mqghc")
@@ -9,4 +18,44 @@ script = ExtResource("1_mqghc")
 [node name="bg" type="TextureRect" parent="." unique_id=677218892]
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("1_s0u8b")
+texture = ExtResource("2_mqghc")
+
+[node name="HS_crack" parent="." unique_id=1752983682 instance=ExtResource("3_fnk50")]
+position = Vector2(1558, 225)
+
+[node name="Sprite2D" parent="HS_crack" index="0" unique_id=988138504]
+texture = null
+
+[node name="HS_chair" parent="." unique_id=1119244311 instance=ExtResource("3_fnk50")]
+position = Vector2(1463, 702)
+states = Array[Resource]([SubResource("Resource_0e81w")])
+
+[node name="Sprite2D" parent="HS_chair" index="0" unique_id=988138504]
+position = Vector2(28, 46)
+scale = Vector2(0.585, 0.585)
+texture = ExtResource("5_vcnne")
+
+[node name="CollisionPolygon2D" parent="HS_chair/Area2D" parent_id_path=PackedInt32Array(1119244311, 1703123123) index="0" unique_id=279463627]
+position = Vector2(25.999996, 100.99999)
+polygon = PackedVector2Array(-11.395126, -4.7828903, -1.5609818, -7.8973236, -1.2487869, -30.58823, 10.614632, -29.920856, 9.131708, 14.126206, 1.0926819, 20.132622, -10.614639, 16.128342)
+
+[node name="HS_lock" parent="." unique_id=934304806 instance=ExtResource("3_fnk50")]
+position = Vector2(969, 471)
+
+[node name="Sprite2D" parent="HS_lock" index="0" unique_id=988138504]
+texture = null
+
+[node name="CollisionPolygon2D" parent="HS_lock/Area2D" parent_id_path=PackedInt32Array(934304806, 1703123123) index="0" unique_id=279463627]
+polygon = PackedVector2Array(-12.721947, -24.025667, -0.23414612, -32.701603, 12.253662, -23.135828, 12.253662, 12.012833, -13.658535, 12.235291)
+
+[node name="HS_chair_02" parent="." unique_id=981615333 instance=ExtResource("3_fnk50")]
+position = Vector2(1560, 620)
+
+[node name="Sprite2D" parent="HS_chair_02" index="0" unique_id=988138504]
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("5_vcnne")
+
+[editable path="HS_crack"]
+[editable path="HS_chair"]
+[editable path="HS_lock"]
+[editable path="HS_chair_02"]

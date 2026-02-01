@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_jyq5n")
-key = "test_key"
-display_name = "测试钥匙"
-description = "这是一把用于测试背包系统的钥匙。"
+key = "key"
+display_name = "一把钥匙"
+description = "这是一把神秘的钥匙。"
 icon = ExtResource("1_r1ghn")
 inspect_image = ExtResource("1_r1ghn")
