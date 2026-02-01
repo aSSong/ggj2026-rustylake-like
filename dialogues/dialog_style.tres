@@ -41,7 +41,8 @@ overrides = {
 "box_color_use_global": "false",
 "box_margin_bottom": "50.0",
 "box_size": "Vector2(850, 120)",
-"text_custom_color": "Color(0, 0, 0, 1)"
+"text_custom_color": "Color(0, 0, 0, 1)",
+"text_size": "32.0"
 }
 
 [sub_resource type="Resource" id="Resource_3tg8w"]
