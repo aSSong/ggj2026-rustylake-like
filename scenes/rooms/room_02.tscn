@@ -33,7 +33,10 @@ interactable = SubResource("Resource_HSCrack_BaseInteractable")
 [sub_resource type="Resource" id="Resource_ckh05"]
 script = ExtResource("5_jk4q7")
 type = 1
-metadata/_custom_type_script = "uid://c1ckjraaop767"
+params = {
+"fly": true,
+"item_key": "key"
+}
 
 [sub_resource type="Resource" id="Resource_Crack_S2_Interactable"]
 script = ExtResource("7_cset")

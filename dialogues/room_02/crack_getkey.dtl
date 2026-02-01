@@ -1,3 +1,2 @@
 这面居然藏了一把钥匙
-do GameState.add_item("key")
 do GameState.set_flag("room02_keyget")
