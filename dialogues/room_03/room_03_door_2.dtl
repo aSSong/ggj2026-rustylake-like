@@ -1,0 +1,6 @@
+果然是这样的！
+[background arg="res://assets/rooms/img_room_03_02.png" fade="0.0"]
+看来宝藏近在眼前了！
+我蹑手蹑脚的悄悄绕过眼前的霸王龙
+向着门后的藏宝室走去
+do SceneFlow.goto_room("room_04")

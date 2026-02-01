@@ -45,11 +45,14 @@ directories/dtl_directory={
 "room_02_door_01": "res://dialogues/room_02/room_02_door_01.dtl",
 "room_02_door_open": "res://dialogues/room_02/room_02_door_open.dtl",
 "room_03_01": "res://dialogues/room_03/room_03_01.dtl",
+"room_03_door_1": "res://dialogues/room_03/room_03_door_1.dtl",
+"room_03_door_2": "res://dialogues/room_03/room_03_door_2.dtl",
 "room_04_01": "res://dialogues/room_04/room_04_01.dtl",
 "room_05_01": "res://dialogues/room_05/room_05_01.dtl",
 "test_book_block": "res://dialogues/getitems/test_book_block.dtl",
 "test_book_click": "res://dialogues/getitems/test_book_click.dtl",
-"test_key_get": "res://dialogues/getitems/test_key_get.dtl"
+"test_key_get": "res://dialogues/getitems/test_key_get.dtl",
+"trex": "res://dialogues/room_03/trex.dtl"
 }
 layout/style_directory={
 "": "res://dialogues/dialog_style.tres",

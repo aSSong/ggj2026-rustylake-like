@@ -135,13 +135,22 @@ func _refresh() -> void:
 
 	# 应用状态贴图（state.texture 优先，其次 visual_texture，其次原有 sprite texture）
 	if _visual:
-		var tex: Texture2D = null
-		if _active_state != null and _active_state.has_method("get"):
-			tex = _active_state.get("texture")
-		if tex == null:
-			tex = visual_texture
-		if tex != null:
-			_visual.texture = tex
+		var has_state := _active_state != null and _active_state.has_method("get")
+		var state_tex: Texture2D = null
+		var clear_when_null := false
+		if has_state:
+			state_tex = _active_state.get("texture")
+			# HotSpotState.clear_texture_when_null（duck-typing）
+			clear_when_null = bool(_active_state.get("clear_texture_when_null"))
+
+		if has_state and state_tex == null and clear_when_null:
+			_visual.texture = null
+		else:
+			var tex: Texture2D = state_tex
+			if tex == null:
+				tex = visual_texture
+			if tex != null:
+				_visual.texture = tex
 
 	if _area:
 		# 不可见时彻底不可点；可见但不可交互时仍可点击用于“blocked 反馈”

@@ -2,11 +2,376 @@
 
 [ext_resource type="Script" uid="uid://b2cv6ldylbsyi" path="res://scripts/rooms/room_03.gd" id="1_w8hce"]
 [ext_resource type="Texture2D" uid="uid://c8blq7l6klcud" path="res://assets/rooms/img_room_03.png" id="2_g4ydk"]
+[ext_resource type="PackedScene" uid="uid://6ssdi1ey4jp7" path="res://scenes/HotSpotArea.tscn" id="3_tgfbo"]
+[ext_resource type="Texture2D" uid="uid://cvcieo8rw6jp3" path="res://assets/rooms/fire.png" id="4_iurs1"]
+[ext_resource type="Script" uid="uid://biixp4urs4qxy" path="res://scripts/hotspots/HotSpotState.gd" id="5_iurs1"]
+[ext_resource type="Script" uid="uid://d14xt8x4u4i3p" path="res://scripts/hotspots/HotSpotConditions.gd" id="6_cond"]
+[ext_resource type="Script" uid="uid://b8lw6xwksp2rg" path="res://scripts/hotspots/HotSpotConditionSet.gd" id="7_cset"]
+[ext_resource type="Script" uid="uid://c1ckjraaop767" path="res://scripts/hotspots/HotSpotAction.gd" id="8_action"]
+[ext_resource type="Script" uid="uid://bw3h3uyqpgwpf" path="res://scripts/rooms/RoomController.gd" id="9_rc"]
+
+[sub_resource type="Resource" id="Resource_Fire1_Action_TurnOff"]
+script = ExtResource("8_action")
+type = 6
+params = {
+"name": "room03_fire1_off",
+"value": true
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Always"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Fire1_On_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room03_fire1_off")
+
+[sub_resource type="Resource" id="Resource_Fire1_On_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire1_On_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire1_On_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire1_on"
+priority = 10
+conditions = SubResource("Resource_Fire1_On_Conditions")
+texture = ExtResource("4_iurs1")
+actions = Array[Resource]([SubResource("Resource_Fire1_Action_TurnOff")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Fire1_Action_TurnOn"]
+script = ExtResource("8_action")
+type = 7
+params = {
+"name": "room03_fire1_off"
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Fire1_Off_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room03_fire1_off")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Fire1_Off_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire1_Off_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire1_Off_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire1_off"
+conditions = SubResource("Resource_Fire1_Off_Conditions")
+clear_texture_when_null = true
+actions = Array[Resource]([SubResource("Resource_Fire1_Action_TurnOn")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Fire2_Action_TurnOff"]
+script = ExtResource("8_action")
+type = 7
+params = {
+"name": "room03_fire2_on"
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Fire2_On_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room03_fire2_on")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Fire2_On_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire2_On_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire2_On_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire2_on"
+priority = 10
+conditions = SubResource("Resource_Fire2_On_Conditions")
+texture = ExtResource("4_iurs1")
+actions = Array[Resource]([SubResource("Resource_Fire2_Action_TurnOff")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Fire2_Action_TurnOn"]
+script = ExtResource("8_action")
+type = 6
+params = {
+"name": "room03_fire2_on",
+"value": true
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Fire2_Off_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room03_fire2_on")
+
+[sub_resource type="Resource" id="Resource_Fire2_Off_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire2_Off_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire2_Off_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire2_off"
+conditions = SubResource("Resource_Fire2_Off_Conditions")
+clear_texture_when_null = true
+actions = Array[Resource]([SubResource("Resource_Fire2_Action_TurnOn")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Fire3_Action_TurnOff"]
+script = ExtResource("8_action")
+type = 7
+params = {
+"name": "room03_fire3_on"
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Fire3_On_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room03_fire3_on")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Fire3_On_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire3_On_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire3_On_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire3_on"
+priority = 10
+conditions = SubResource("Resource_Fire3_On_Conditions")
+texture = ExtResource("4_iurs1")
+actions = Array[Resource]([SubResource("Resource_Fire3_Action_TurnOff")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Fire3_Action_TurnOn"]
+script = ExtResource("8_action")
+type = 6
+params = {
+"name": "room03_fire3_on",
+"value": true
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Fire3_Off_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room03_fire3_on")
+
+[sub_resource type="Resource" id="Resource_Fire3_Off_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire3_Off_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire3_Off_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire3_off"
+conditions = SubResource("Resource_Fire3_Off_Conditions")
+clear_texture_when_null = true
+actions = Array[Resource]([SubResource("Resource_Fire3_Action_TurnOn")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Fire4_Action_TurnOff"]
+script = ExtResource("8_action")
+type = 7
+params = {
+"name": "room03_fire4_on"
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Fire4_On_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room03_fire4_on")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Fire4_On_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire4_On_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire4_On_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire4_on"
+priority = 10
+conditions = SubResource("Resource_Fire4_On_Conditions")
+texture = ExtResource("4_iurs1")
+actions = Array[Resource]([SubResource("Resource_Fire4_Action_TurnOff")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Fire4_Action_TurnOn"]
+script = ExtResource("8_action")
+type = 6
+params = {
+"name": "room03_fire4_on",
+"value": true
+}
+metadata/_custom_type_script = "uid://c1ckjraaop767"
+
+[sub_resource type="Resource" id="Resource_Fire4_Off_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room03_fire4_on")
+
+[sub_resource type="Resource" id="Resource_Fire4_Off_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Fire4_Off_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Fire4_Off_State"]
+script = ExtResource("5_iurs1")
+state_id = "fire4_off"
+conditions = SubResource("Resource_Fire4_Off_Conditions")
+clear_texture_when_null = true
+actions = Array[Resource]([SubResource("Resource_Fire4_Action_TurnOn")])
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Door_AllFire_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray("room03_fire2_on", "room03_fire3_on", "room03_fire4_on")
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray("room03_fire1_off")
+
+[sub_resource type="Resource" id="Resource_Door_AllFire_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Door_AllFire_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Door_AllFire_State"]
+script = ExtResource("5_iurs1")
+state_id = "door_all_fire"
+priority = 10
+conditions = SubResource("Resource_Door_AllFire_Conditions")
+click_dialog_timeline = "room_03_door_2"
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_Door_Default_Visible"]
+script = ExtResource("7_cset")
+requires_flags_all = PackedStringArray()
+requires_flags_any = PackedStringArray()
+requires_items = PackedStringArray()
+forbids_flags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_Door_Default_Conditions"]
+script = ExtResource("6_cond")
+visible = SubResource("Resource_Door_Default_Visible")
+interactable = SubResource("Resource_Always")
+
+[sub_resource type="Resource" id="Resource_Door_Default_State"]
+script = ExtResource("5_iurs1")
+state_id = "door_default"
+conditions = SubResource("Resource_Door_Default_Conditions")
+click_dialog_timeline = "room_03_door_1"
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
+
+[sub_resource type="Resource" id="Resource_ie674"]
+script = ExtResource("5_iurs1")
+click_dialog_timeline = "uid://bjco3xjv34de"
+metadata/_custom_type_script = "uid://biixp4urs4qxy"
 
 [node name="room_03" type="Node2D" unique_id=641078993]
 script = ExtResource("1_w8hce")
+
+[node name="RoomController" type="Node" parent="." unique_id=691173288]
+script = ExtResource("9_rc")
 
 [node name="bg" type="TextureRect" parent="." unique_id=142292794]
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_g4ydk")
+
+[node name="HS_fire1" parent="." unique_id=1752983682 instance=ExtResource("3_tgfbo")]
+position = Vector2(253, 299)
+states = Array[Resource]([SubResource("Resource_Fire1_On_State"), SubResource("Resource_Fire1_Off_State")])
+
+[node name="Sprite2D" parent="HS_fire1" index="0" unique_id=988138504]
+position = Vector2(5, 0)
+texture = null
+
+[node name="CollisionPolygon2D" parent="HS_fire1/Area2D" parent_id_path=PackedInt32Array(1752983682, 1703123123) index="0" unique_id=279463627]
+polygon = PackedVector2Array(-4.214634, 4.449198, -2.5756092, -4.6716576, 4.6048794, -1.3347607, 2.4195137, 17.574327, -4.3707314, 17.79679)
+
+[node name="HS_fire2" parent="." unique_id=2009555140 instance=ExtResource("3_tgfbo")]
+position = Vector2(643, 303)
+states = Array[Resource]([SubResource("Resource_Fire2_On_State"), SubResource("Resource_Fire2_Off_State")])
+
+[node name="Sprite2D" parent="HS_fire2" index="0" unique_id=988138504]
+position = Vector2(5, 0)
+texture = null
+
+[node name="CollisionPolygon2D" parent="HS_fire2/Area2D" parent_id_path=PackedInt32Array(2009555140, 1703123123) index="0" unique_id=279463627]
+polygon = PackedVector2Array(-4.136585, 4.449196, -4.136585, -5.339037, 2.6536598, -5.7839565, 2.575611, 14.126202, -3.668293, 13.45882)
+
+[node name="HS_fire3" parent="." unique_id=742699961 instance=ExtResource("3_tgfbo")]
+position = Vector2(1040, 307)
+states = Array[Resource]([SubResource("Resource_Fire3_On_State"), SubResource("Resource_Fire3_Off_State")])
+
+[node name="Sprite2D" parent="HS_fire3" index="0" unique_id=988138504]
+position = Vector2(5, 0)
+texture = null
+
+[node name="CollisionPolygon2D" parent="HS_fire3/Area2D" parent_id_path=PackedInt32Array(742699961, 1703123123) index="0" unique_id=279463627]
+polygon = PackedVector2Array(-4.7609787, 3.5593567, -3.5121918, -9.0096245, 4.68293, -5.7839565, 3.7463455, 15.572189, -4.0585327, 15.794651)
+
+[node name="HS_fire4" parent="." unique_id=216834045 instance=ExtResource("3_tgfbo")]
+position = Vector2(1557, 298)
+states = Array[Resource]([SubResource("Resource_Fire4_On_State"), SubResource("Resource_Fire4_Off_State")])
+
+[node name="Sprite2D" parent="HS_fire4" index="0" unique_id=988138504]
+position = Vector2(5, 0)
+texture = null
+
+[node name="CollisionPolygon2D" parent="HS_fire4/Area2D" parent_id_path=PackedInt32Array(216834045, 1703123123) index="0" unique_id=279463627]
+polygon = PackedVector2Array(-3.434143, 3.7818184, -2.9658508, -7.118717, 5.151222, -6.5625668, 7.336586, 18.464169, -2.0292664, 17.796787)
+
+[node name="HS_door" parent="." unique_id=1465042367 instance=ExtResource("3_tgfbo")]
+position = Vector2(802, 360)
+states = Array[Resource]([SubResource("Resource_Door_AllFire_State"), SubResource("Resource_Door_Default_State")])
+
+[node name="Sprite2D" parent="HS_door" index="0" unique_id=988138504]
+texture = null
+
+[node name="CollisionPolygon2D" parent="HS_door/Area2D" parent_id_path=PackedInt32Array(1465042367, 1703123123) index="0" unique_id=279463627]
+polygon = PackedVector2Array(-8.039028, 23.358284, -8.819515, -11.345455, 10.380486, -11.901604, 10.770729, 21.801067, 1.5609741, 18.019249)
+
+[node name="HS_Trex" parent="." unique_id=1532420399 instance=ExtResource("3_tgfbo")]
+position = Vector2(891, 726)
+states = Array[Resource]([SubResource("Resource_ie674")])
+
+[node name="Sprite2D" parent="HS_Trex" index="0" unique_id=988138504]
+texture = null
+
+[node name="CollisionPolygon2D" parent="HS_Trex/Area2D" parent_id_path=PackedInt32Array(1532420399, 1703123123) index="0" unique_id=279463627]
+position = Vector2(56.999992, 107.99999)
+polygon = PackedVector2Array(-36.44878, -3.0032043, -26.380486, -22.245987, -18.263412, -30.810688, -8.585365, -32.36791, 22.946342, -22.134758, 32.390244, -11.234222, 33.639023, 1.0010681, 4.2926865, 0.55615234, -15.609753, 14.0149765, -30.673168, 12.012833)
+
+[editable path="HS_fire1"]
+[editable path="HS_fire2"]
+[editable path="HS_fire3"]
+[editable path="HS_fire4"]
+[editable path="HS_door"]
+[editable path="HS_Trex"]
