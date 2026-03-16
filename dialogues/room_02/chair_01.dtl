@@ -1,0 +1,4 @@
+这把椅子看起来不错
+刚好以垫脚
+[wait time="1.0"]
+do GameState.set_flag("chair_clicked")

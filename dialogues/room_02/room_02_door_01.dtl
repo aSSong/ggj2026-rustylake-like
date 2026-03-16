@@ -1,0 +1,3 @@
+这扇门被一把大锁牢牢的锁住
+也许钥匙就被藏在什么地方
+do GameState.set_flag("room02_door_clicked")

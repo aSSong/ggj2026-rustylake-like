@@ -420,7 +420,11 @@ func load_layout_scene_customization(custom_scene_path:String, overrides:Diction
 				else:
 					current_value = customization_editor_info[i["name"]]["orig"]
 
-				var input: Node = DialogicUtil.setup_script_property_edit_node(i, current_value, set_export_override)
+				var input: Control = DialogicUtil.setup_script_property_edit_node(i, current_value, set_export_override)
+				if input == null:
+					var fallback := Label.new()
+					fallback.text = "Unsupported setting type"
+					input = fallback
 
 				input.size_flags_horizontal = SIZE_EXPAND_FILL
 				customization_editor_info[i["name"]]["node"] = input

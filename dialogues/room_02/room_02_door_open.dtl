@@ -1,0 +1,5 @@
+太好了
+do GameState.remove_item("key")
+就是这把钥匙，可以前往下一个房间了
+[wait time="1.0"]
+do SceneFlow.goto_room("room_03")

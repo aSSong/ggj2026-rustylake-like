@@ -22,6 +22,7 @@ extends CanvasLayer
 @onready var _popup_desc: RichTextLabel = $Control/ItemPopup/Panel/VBox/Desc
 
 var _buttons_by_key: Dictionary = {} # String -> TextureButton
+var _gain_fly_count: int = 0
 
 
 func _ready() -> void:
@@ -46,6 +47,14 @@ func _ready() -> void:
 
 	_refresh()
 
+func _update_visibility() -> void:
+	var keys: Array = _inventory.call("get_items")
+	var should_show := (keys.size() > 0) or (_gain_fly_count > 0)
+	visible = should_show
+	if not should_show:
+		# UI 隐藏时顺便关闭物品详情，避免“空背包还悬浮弹窗”
+		_popup.hide()
+
 
 func _refresh(_a = null, _b = null) -> void:
 	for c in _slots.get_children():
@@ -53,6 +62,7 @@ func _refresh(_a = null, _b = null) -> void:
 	_buttons_by_key.clear()
 
 	var keys: Array = _inventory.call("get_items")
+	_update_visibility()
 	for k in keys:
 		var key := str(k)
 		var item: Resource = _item_db.call("get_item", key)
@@ -111,6 +121,8 @@ func play_item_gain_fly(item_key: String, from_world_pos: Vector2) -> void:
 	var icon: Texture2D = item.get("icon")
 	if icon == null:
 		return
+	_gain_fly_count += 1
+	_update_visibility()
 
 	var idx := int((_inventory.call("get_items") as Array).size())
 	var sep := 12.0
@@ -141,4 +153,6 @@ func play_item_gain_fly(item_key: String, from_world_pos: Vector2) -> void:
 	tween.finished.connect(fx.queue_free)
 
 	await tween.finished
+	_gain_fly_count = max(0, _gain_fly_count - 1)
+	_update_visibility()
 
