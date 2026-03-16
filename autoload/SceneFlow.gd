@@ -9,9 +9,17 @@ signal step_activated(step_id: String)
 signal step_completed(step_id: String)
 signal flow_completed(graph_id: String)
 
+## 游戏开始时进入的初始房间 ID。
+## 必须存在于下面的 `_room_registry` 中。
 @export var start_room_id: String = "room_01"
+## 简化流程资源入口。
+## 存在时优先加载并编译成底层 FlowGraph；适合新的作者层配置。
 @export_file("*.tres") var simple_flow_path: String = "res://flows/room_01_simple_flow.tres"
+## 旧版底层 FlowGraph 资源入口。
+## 当 simple_flow_path 为空或加载失败时，回退使用这里。
 @export_file("*.tres") var active_flow_path: String = "res://flows/room_01_flow.tres"
+## 是否在 start_game() 时自动启动流程。
+## 关闭后可由外部在合适时机手动调用 start_flow()。
 @export var auto_start_flow: bool = true
 
 var _room_registry: Dictionary = {

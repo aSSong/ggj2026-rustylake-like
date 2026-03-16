@@ -28,45 +28,109 @@ enum SimpleMode {
 }
 
 @export_group("Advanced")
-@export var authoring_mode: AuthoringMode = AuthoringMode.ADVANCED
+## 热点作者配置模式。
+## - Advanced：沿用原有的 states/conditions/lifecycle 资源式配置。
+## - Simple：使用下面的选择式字段，由脚本自动生成运行时状态。
+@export_enum("Advanced | 使用原有资源式配置", "Simple | 使用选择式配置") var authoring_mode: int = AuthoringMode.ADVANCED
+## Advanced 模式下的基础条件入口。
+## 当某个 state 没有显式 conditions 时，会回退使用这里的条件。
 @export var conditions: Resource
+## Advanced 模式下的状态列表。
+## 一般用于多状态热点、优先级切换、复杂谜题。
 @export var states: Array[Resource] = []
+## Advanced 模式下的兜底状态。
+## 如果没有任何 state 满足 visible 条件，则会回退到这个状态。
 @export var default_state: Resource
+## Advanced 模式下的生命周期配置。
+## 用于控制热点何时出现、何时隐藏/销毁。
 @export var lifecycle: Resource
 
 @export_group("Simple")
-@export var simple_mode: SimpleMode = SimpleMode.DIALOG
+## Simple 模式下的交互类型。
+## 根据不同模式，只需要填写对应分组里的少量字段即可。
+@export_enum(
+	"Dialog | 仅播放对话",
+	"Pickup | 点击后获得道具",
+	"Change Room | 点击后切换房间",
+	"Set Flag | 点击后设置状态",
+	"Toggle Flag | 点击后切换状态"
+) var simple_mode: int = SimpleMode.DIALOG
+## 点击成功时播放的 Dialogic timeline。
+## 适用于 simple_mode = Dialog/Pickup/Change Room/Set Flag/Toggle Flag。
 @export_file("*.dtl") var simple_click_dialog_timeline: String = ""
+## 不满足交互条件时播放的 Dialogic timeline。
+## 留空时会兜底使用 simple_click_dialog_timeline。
 @export_file("*.dtl") var simple_blocked_dialog_timeline: String = ""
+## Simple 单状态模式下使用的贴图。
+## Toggle 模式请改用下面的 On/Off Texture。
 @export var simple_texture: Texture2D
+## 是否让 visible 条件与 interactable 条件保持一致。
+## - true：show/hide/require/forbid/item 条件会同时控制显示和可交互。
+## - false：show/hide 只控制显示，require/forbid/item 只控制可交互。
 @export var simple_visible_equals_interactable: bool = true
+## 需要全部满足的显示 flag。
+## 只有这些 flag 全为 true 时，热点才会显示。
 @export var simple_show_if_flags_all: PackedStringArray = PackedStringArray()
+## 隐藏 flag 列表。
+## 这些 flag 任意一个为 true 时，热点会隐藏。
 @export var simple_hide_if_flags: PackedStringArray = PackedStringArray()
+## 需要全部满足的可交互 flag。
+## 当 simple_visible_equals_interactable = true 时，也会一起影响显示。
 @export var simple_require_flags_all: PackedStringArray = PackedStringArray()
+## 需要持有的道具列表。
+## 用于“只有拿到某个物品后才能点击”的场景。
 @export var simple_require_items: PackedStringArray = PackedStringArray()
+## 禁止交互的 flag 列表。
+## 这些 flag 任意一个为 true 时，热点不可交互。
 @export var simple_forbid_flags: PackedStringArray = PackedStringArray()
 
 @export_group("Simple Action")
+## Pickup 模式要获得的道具 key。
+## 对应 ItemDB/Inventory 里的 item_key。
 @export var simple_item_key: String = ""
+## Change Room 模式要跳转的 room_id。
+## 取值需要存在于 SceneFlow 的房间注册表中。
 @export var simple_change_room_id: String = ""
+## Set Flag 模式点击后要设置的 flag 名称。
 @export var simple_set_flag_name: String = ""
+## Set Flag 模式写入的 flag 值。
+## 一般保持 true；需要清空状态时可改为 false。
 @export var simple_set_flag_value: bool = true
 
 @export_group("Simple Toggle")
+## Toggle 模式使用的 flag 名称。
+## true 表示 On 状态，false 表示 Off 状态。
 @export var simple_toggle_flag_name: String = ""
+## Toggle 模式处于 On 状态时显示的贴图。
 @export var simple_toggle_on_texture: Texture2D
+## Toggle 模式处于 Off 状态时显示的贴图。
+## 留空时会清空 Sprite 贴图，适合“点亮前不可见”的按钮/火焰。
 @export var simple_toggle_off_texture: Texture2D
+## Toggle 模式切换到 On 状态时播放的对话。
 @export_file("*.dtl") var simple_toggle_on_dialog_timeline: String = ""
+## Toggle 模式切换到 Off 状态时播放的对话。
 @export_file("*.dtl") var simple_toggle_off_dialog_timeline: String = ""
 
 @export_group("Simple Lifecycle")
+## 生成条件：这些 flag 全满足后，热点才允许出现。
+## 留空表示默认出生即存在。
 @export var simple_spawn_flags_all: PackedStringArray = PackedStringArray()
+## 销毁条件：这些 flag 全满足后，热点会隐藏或释放。
 @export var simple_destroy_flags_all: PackedStringArray = PackedStringArray()
-@export_enum("Hide", "Free") var simple_destroy_mode: int = 1
+## 生命周期命中后的处理方式。
+## - Hide：仅隐藏，节点仍保留。
+## - Free：直接 queue_free。
+@export_enum("Hide | 仅隐藏", "Free | 直接释放节点") var simple_destroy_mode: int = 1
 
 @export_group("Interaction")
+## 当热点可见但不可交互时，是否仍然发出点击事件。
+## 打开后可以配合 blocked_dialog_timeline 做“被锁住”的提示。
 @export var emit_when_blocked: bool = true
+## 是否只响应鼠标左键。
+## 关掉后，右键等其他鼠标键也能触发点击。
 @export var left_mouse_button_only: bool = true
+## 是否在输出窗口打印热点 payload。
+## 适合调试当前热点最终发出的对话、动作和状态。
 @export var debug_print_payload: bool = false
 
 @onready var _visual: Sprite2D = $Sprite2D

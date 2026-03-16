@@ -6,10 +6,15 @@ enum ActionType {
 	CHANGE_ROOM,
 }
 
-@export var type: ActionType = ActionType.SET_FLAG
+## 底层 FlowAction 类型。
+## 通常不建议作者直接编辑；SimpleFlow 会自动生成这些动作。
+@export_enum("Set Flag | 设置一个世界状态", "Change Room | 切换到另一个房间") var type: int = ActionType.SET_FLAG
 
+## Set Flag 类型使用的 flag 名称。
 @export var flag_name: String = ""
+## Set Flag 类型写入的布尔值。
 @export var flag_value: bool = true
+## Change Room 类型使用的 room_id。
 @export var room_id: String = ""
 
 

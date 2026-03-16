@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dumi5fjoqg7ih"]
 
-[ext_resource type="Script" uid="uid://bll2rl57045no" path="res://scripts/rooms/room_02.gd" id="1_mqghc"]
+[ext_resource type="Script" path="res://scripts/rooms/room_02.gd" id="1_mqghc"]
 [ext_resource type="Texture2D" uid="uid://ju15jb0qong0" path="res://assets/rooms/room_02_01.png" id="2_mqghc"]
 [ext_resource type="PackedScene" uid="uid://6ssdi1ey4jp7" path="res://scenes/HotSpotArea.tscn" id="3_fnk50"]
 [ext_resource type="Script" uid="uid://biixp4urs4qxy" path="res://scripts/hotspots/HotSpotState.gd" id="4_qd0q8"]
@@ -90,52 +90,6 @@ script = ExtResource("4_qd0q8")
 state_id = "crack_1"
 conditions = SubResource("Resource_Crack_S1_Conditions")
 click_dialog_timeline = "crack_01"
-metadata/_custom_type_script = "uid://biixp4urs4qxy"
-
-[sub_resource type="Resource" id="Resource_HSChair_BaseInteractable"]
-script = ExtResource("7_cset")
-requires_flags_all = PackedStringArray("crack_clicked")
-requires_flags_any = PackedStringArray()
-requires_items = PackedStringArray()
-forbids_flags = PackedStringArray("chair_clicked")
-
-[sub_resource type="Resource" id="Resource_HSChair_BaseVisible"]
-script = ExtResource("7_cset")
-requires_flags_all = PackedStringArray()
-requires_flags_any = PackedStringArray()
-requires_items = PackedStringArray()
-forbids_flags = PackedStringArray("chair_clicked")
-
-[sub_resource type="Resource" id="Resource_HSChair_BaseConditions"]
-script = ExtResource("6_cond")
-visible = SubResource("Resource_HSChair_BaseVisible")
-interactable = SubResource("Resource_HSChair_BaseInteractable")
-
-[sub_resource type="Resource" id="Resource_Chair_S1_Interactable"]
-script = ExtResource("7_cset")
-requires_flags_all = PackedStringArray("crack_clicked")
-requires_flags_any = PackedStringArray()
-requires_items = PackedStringArray()
-forbids_flags = PackedStringArray("chair_clicked")
-
-[sub_resource type="Resource" id="Resource_Chair_S1_Visible"]
-script = ExtResource("7_cset")
-requires_flags_all = PackedStringArray("crack_clicked")
-requires_flags_any = PackedStringArray()
-requires_items = PackedStringArray()
-forbids_flags = PackedStringArray("chair_clicked")
-
-[sub_resource type="Resource" id="Resource_Chair_S1_Conditions"]
-script = ExtResource("6_cond")
-visible = SubResource("Resource_Chair_S1_Visible")
-interactable = SubResource("Resource_Chair_S1_Interactable")
-
-[sub_resource type="Resource" id="Resource_Chair_S1_State"]
-script = ExtResource("4_qd0q8")
-state_id = "chair_1"
-conditions = SubResource("Resource_Chair_S1_Conditions")
-texture = ExtResource("5_vcnne")
-click_dialog_timeline = "chair_01"
 metadata/_custom_type_script = "uid://biixp4urs4qxy"
 
 [sub_resource type="Resource" id="Resource_HSLock_BaseInteractable"]
@@ -277,7 +231,6 @@ texture = null
 [node name="HS_chair" parent="." unique_id=1119244311 instance=ExtResource("3_fnk50")]
 position = Vector2(1463, 702)
 authoring_mode = 1
-simple_mode = 0
 simple_click_dialog_timeline = "chair_01"
 simple_texture = ExtResource("5_vcnne")
 simple_show_if_flags_all = PackedStringArray("crack_clicked")
