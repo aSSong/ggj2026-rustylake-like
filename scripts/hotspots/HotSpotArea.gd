@@ -307,6 +307,14 @@ func _build_simple_actions_for_mode() -> Array[Resource]:
 	return out
 
 
+func _to_resource_array(values: Array) -> Array[Resource]:
+	var out: Array[Resource] = []
+	for value in values:
+		if value is Resource:
+			out.append(value)
+	return out
+
+
 func _build_simple_visible_condition_set(extra_requires_all: PackedStringArray = PackedStringArray(), extra_forbids: PackedStringArray = PackedStringArray()) -> Resource:
 	var requires_all := _merge_flags(simple_show_if_flags_all, extra_requires_all)
 	var forbids := _merge_flags(simple_hide_if_flags, extra_forbids)
@@ -374,7 +382,7 @@ func _new_state(
 	state.texture = texture
 	state.click_dialog_timeline = click_dialog_timeline
 	state.blocked_dialog_timeline = blocked_dialog_timeline
-	state.actions = state_actions
+	state.actions = _to_resource_array(state_actions)
 	state.clear_texture_when_null = clear_when_null
 	if state_id.contains("toggle_on"):
 		state.priority = 10
