@@ -306,7 +306,10 @@ texture = ExtResource("2_g4ydk")
 
 [node name="HS_fire1" parent="." unique_id=1752983682 instance=ExtResource("3_tgfbo")]
 position = Vector2(253, 299)
-states = Array[Resource]([SubResource("Resource_Fire1_On_State"), SubResource("Resource_Fire1_Off_State")])
+authoring_mode = 1
+simple_mode = 4
+simple_toggle_flag_name = "room03_fire1_on"
+simple_toggle_on_texture = ExtResource("4_iurs1")
 
 [node name="Sprite2D" parent="HS_fire1" index="0" unique_id=988138504]
 position = Vector2(5, 0)
@@ -317,7 +320,10 @@ polygon = PackedVector2Array(-4.214634, 4.449198, -2.5756092, -4.6716576, 4.6048
 
 [node name="HS_fire2" parent="." unique_id=2009555140 instance=ExtResource("3_tgfbo")]
 position = Vector2(643, 303)
-states = Array[Resource]([SubResource("Resource_Fire2_On_State"), SubResource("Resource_Fire2_Off_State")])
+authoring_mode = 1
+simple_mode = 4
+simple_toggle_flag_name = "room03_fire2_on"
+simple_toggle_on_texture = ExtResource("4_iurs1")
 
 [node name="Sprite2D" parent="HS_fire2" index="0" unique_id=988138504]
 position = Vector2(5, 0)
@@ -328,7 +334,10 @@ polygon = PackedVector2Array(-4.136585, 4.449196, -4.136585, -5.339037, 2.653659
 
 [node name="HS_fire3" parent="." unique_id=742699961 instance=ExtResource("3_tgfbo")]
 position = Vector2(1040, 307)
-states = Array[Resource]([SubResource("Resource_Fire3_On_State"), SubResource("Resource_Fire3_Off_State")])
+authoring_mode = 1
+simple_mode = 4
+simple_toggle_flag_name = "room03_fire3_on"
+simple_toggle_on_texture = ExtResource("4_iurs1")
 
 [node name="Sprite2D" parent="HS_fire3" index="0" unique_id=988138504]
 position = Vector2(5, 0)
@@ -339,7 +348,10 @@ polygon = PackedVector2Array(-4.7609787, 3.5593567, -3.5121918, -9.0096245, 4.68
 
 [node name="HS_fire4" parent="." unique_id=216834045 instance=ExtResource("3_tgfbo")]
 position = Vector2(1557, 298)
-states = Array[Resource]([SubResource("Resource_Fire4_On_State"), SubResource("Resource_Fire4_Off_State")])
+authoring_mode = 1
+simple_mode = 4
+simple_toggle_flag_name = "room03_fire4_on"
+simple_toggle_on_texture = ExtResource("4_iurs1")
 
 [node name="Sprite2D" parent="HS_fire4" index="0" unique_id=988138504]
 position = Vector2(5, 0)
@@ -350,7 +362,12 @@ polygon = PackedVector2Array(-3.434143, 3.7818184, -2.9658508, -7.118717, 5.1512
 
 [node name="HS_door" parent="." unique_id=1465042367 instance=ExtResource("3_tgfbo")]
 position = Vector2(802, 360)
-states = Array[Resource]([SubResource("Resource_Door_AllFire_State"), SubResource("Resource_Door_Default_State")])
+authoring_mode = 1
+simple_mode = 0
+simple_click_dialog_timeline = "room_03_door_2"
+simple_blocked_dialog_timeline = "room_03_door_1"
+simple_visible_equals_interactable = false
+simple_require_flags_all = PackedStringArray("room03_fire1_on", "room03_fire2_on", "room03_fire3_on", "room03_fire4_on")
 
 [node name="Sprite2D" parent="HS_door" index="0" unique_id=988138504]
 texture = null
@@ -360,7 +377,9 @@ polygon = PackedVector2Array(-8.039028, 23.358284, -8.819515, -11.345455, 10.380
 
 [node name="HS_Trex" parent="." unique_id=1532420399 instance=ExtResource("3_tgfbo")]
 position = Vector2(891, 726)
-states = Array[Resource]([SubResource("Resource_ie674")])
+authoring_mode = 1
+simple_mode = 0
+simple_click_dialog_timeline = "uid://bjco3xjv34de"
 
 [node name="Sprite2D" parent="HS_Trex" index="0" unique_id=988138504]
 texture = null

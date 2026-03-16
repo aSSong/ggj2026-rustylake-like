@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dd1ecls30doww" path="res://scenes/UI/UI_inventory.tscn" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://cxos1f2sgxmk4" path="res://scenes/main.gd" id="3_8q7j0"]
+[ext_resource type="Script" uid="uid://cnn2doeqnmd8r" path="res://scripts/bridge/HotspotToFlagBridge.gd" id="4_hotspotflag"]
 [ext_resource type="Script" uid="uid://m0siol20exk7" path="res://scripts/bridge/FlagToDialogicBridge.gd" id="5_6w0c5"]
 [ext_resource type="Script" uid="uid://cl6bpfotchd5c" path="res://scripts/bridge/FlagDelayBridge.gd" id="6_0g4m8"]
 
@@ -30,6 +31,9 @@ mapping = {
 "done_flag": "delay_after_hs02_done"
 }
 }
+
+[node name="HotspotToFlagBridge" type="Node" parent="." unique_id=1336407715]
+script = ExtResource("4_hotspotflag")
 
 [node name="RoomRoot" type="Node2D" parent="." unique_id=1869576370]
 

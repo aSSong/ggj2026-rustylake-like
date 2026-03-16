@@ -10,6 +10,7 @@ signal step_completed(step_id: String)
 signal flow_completed(graph_id: String)
 
 @export var start_room_id: String = "room_01"
+@export_file("*.tres") var simple_flow_path: String = "res://flows/room_01_simple_flow.tres"
 @export_file("*.tres") var active_flow_path: String = "res://flows/room_01_flow.tres"
 @export var auto_start_flow: bool = true
 
@@ -62,9 +63,11 @@ func start_flow() -> void:
 	_status_by_id.clear()
 	_unlocked_by_id.clear()
 
-	_active_flow = _load_flow()
+	var bundle := _load_flow_bundle()
+	_active_flow = bundle.get("graph", null)
+	_configure_runtime_bridges(bundle)
 	if _active_flow == null:
-		push_error("SceneFlow: failed loading flow: %s" % active_flow_path)
+		push_error("SceneFlow: failed loading flow: %s / %s" % [simple_flow_path, active_flow_path])
 		return
 	if _active_flow.has_method("rebuild_index"):
 		_active_flow.call("rebuild_index")
@@ -221,7 +224,7 @@ func _activate_step(step_id: String) -> void:
 	if step:
 		for a in step.get("on_enter_actions"):
 			if a and a.has_method("apply"):
-				a.call("apply", _game_state)
+				a.call("apply", _game_state, {"scene_flow": self})
 
 
 func _complete_step(step: Resource) -> void:
@@ -235,7 +238,7 @@ func _complete_step(step: Resource) -> void:
 
 	for a in step.get("on_complete_actions"):
 		if a and a.has_method("apply"):
-			a.call("apply", _game_state)
+			a.call("apply", _game_state, {"scene_flow": self})
 
 	for next_id in step.get("next_ids"):
 		if _unlocked_by_id.has(next_id):
@@ -261,3 +264,34 @@ func _load_flow() -> Resource:
 	if active_flow_path.is_empty():
 		return null
 	return load(active_flow_path)
+
+
+func _load_flow_bundle() -> Dictionary:
+	if not simple_flow_path.is_empty():
+		var simple_flow: Resource = load(simple_flow_path)
+		if simple_flow != null:
+			var compiler := preload("res://scripts/flow/SimpleFlowCompiler.gd").new()
+			return compiler.compile(simple_flow)
+		push_warning("SceneFlow: failed loading simple flow: %s" % simple_flow_path)
+
+	return {
+		"graph": _load_flow(),
+		"dialog_mapping": {},
+		"delay_mapping": {},
+	}
+
+
+func _configure_runtime_bridges(bundle: Dictionary) -> void:
+	var scene := get_tree().current_scene
+	if scene == null:
+		return
+
+	_apply_bridge_mapping(scene.get_node_or_null("FlagToDialogicBridge"), bundle.get("dialog_mapping", {}))
+	_apply_bridge_mapping(scene.get_node_or_null("FlagDelayBridge"), bundle.get("delay_mapping", {}))
+
+
+func _apply_bridge_mapping(node: Node, mapping: Dictionary) -> void:
+	if node == null:
+		return
+	if node.has_method("set_runtime_mapping"):
+		node.call("set_runtime_mapping", mapping)

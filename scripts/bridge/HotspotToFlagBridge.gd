@@ -17,6 +17,8 @@ extends Node
 @onready var _event_bus: Node = get_node("/root/EventBus")
 @onready var _game_state: Node = get_node("/root/GameState")
 
+var _runtime_mapping: Dictionary = {}
+
 
 func _ready() -> void:
 	if not _event_bus.hotspot_action.is_connected(_on_hotspot_action):
@@ -32,12 +34,31 @@ func _on_hotspot_action(payload: Dictionary) -> void:
 		return
 
 	var flag_name := ""
-	if mapping.has(hotspot_id):
+	if _runtime_mapping.has(hotspot_id):
+		flag_name = str(_runtime_mapping[hotspot_id])
+	elif mapping.has(hotspot_id):
 		flag_name = str(mapping[hotspot_id])
 	elif auto_flag:
-		flag_name = "%s%s%s" % [auto_prefix, hotspot_id.to_lower(), auto_suffix]
+		flag_name = _auto_flag_name_for(hotspot_id)
 
 	if flag_name.is_empty():
 		return
 	_game_state.call("set_flag", flag_name, true)
+
+
+func set_runtime_mapping(new_mapping: Dictionary) -> void:
+	_runtime_mapping = new_mapping.duplicate(true)
+
+
+func clear_runtime_mapping() -> void:
+	_runtime_mapping.clear()
+
+
+func _auto_flag_name_for(hotspot_id: String) -> String:
+	var token := hotspot_id.strip_edges().to_lower()
+	if token.is_empty():
+		return ""
+	if not auto_prefix.is_empty() and token.begins_with(auto_prefix):
+		return "%s%s" % [token, auto_suffix]
+	return "%s%s%s" % [auto_prefix, token, auto_suffix]
 

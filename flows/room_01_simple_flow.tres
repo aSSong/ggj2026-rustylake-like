@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="SimpleFlow" format=3]
+
+[ext_resource type="Script" path="res://scripts/flow/SimpleFlow.gd" id="1_simple_flow"]
+[ext_resource type="Script" path="res://scripts/flow/SimpleFlowStep.gd" id="2_simple_step"]
+
+[sub_resource type="Resource" id="SimpleStep_OP01"]
+script = ExtResource("2_simple_step")
+step_id = "Step_OP01"
+kind = 0
+timeline = "res://dialogues/op_01.dtl"
+next_step_ids = PackedStringArray("Step_HS02")
+
+[sub_resource type="Resource" id="SimpleStep_HS02"]
+script = ExtResource("2_simple_step")
+step_id = "Step_HS02"
+after_step_ids = PackedStringArray("Step_OP01")
+kind = 1
+hotspot_id = "HS_02"
+next_step_ids = PackedStringArray("Step_HS01")
+
+[sub_resource type="Resource" id="SimpleStep_HS01"]
+script = ExtResource("2_simple_step")
+step_id = "Step_HS01"
+after_step_ids = PackedStringArray("Step_HS02")
+kind = 1
+hotspot_id = "HS_01"
+next_step_ids = PackedStringArray("Step_DelayAfterHS02")
+
+[sub_resource type="Resource" id="SimpleStep_DelayAfterHS02"]
+script = ExtResource("2_simple_step")
+step_id = "Step_DelayAfterHS02"
+after_step_ids = PackedStringArray("Step_HS01")
+kind = 2
+delay_sec = 1.0
+next_step_ids = PackedStringArray("Step_ED01")
+
+[sub_resource type="Resource" id="SimpleStep_ED01"]
+script = ExtResource("2_simple_step")
+step_id = "Step_ED01"
+after_step_ids = PackedStringArray("Step_DelayAfterHS02")
+kind = 0
+timeline = "res://dialogues/ed_01.dtl"
+next_step_ids = PackedStringArray("End")
+
+[sub_resource type="Resource" id="SimpleStep_End"]
+script = ExtResource("2_simple_step")
+step_id = "End"
+after_step_ids = PackedStringArray("Step_ED01")
+kind = 3
+flag_name = "game_completed"
+flag_value = true
+
+[resource]
+script = ExtResource("1_simple_flow")
+graph_id = "room_01_flow"
+start_steps = PackedStringArray("Step_OP01")
+steps = Array[Resource]([SubResource("SimpleStep_OP01"), SubResource("SimpleStep_HS02"), SubResource("SimpleStep_HS01"), SubResource("SimpleStep_DelayAfterHS02"), SubResource("SimpleStep_ED01"), SubResource("SimpleStep_End")])

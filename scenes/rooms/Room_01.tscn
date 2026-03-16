@@ -118,9 +118,13 @@ texture = ExtResource("1_o5qli")
 [node name="HS_01" parent="." unique_id=959689758 instance=ExtResource("2_oyc2o")]
 position = Vector2(960, 540)
 hotspot_id = "HS_01"
+authoring_mode = 1
+simple_mode = 1
+simple_click_dialog_timeline = "uid://dwfx18ehbg6lo"
+simple_item_key = "key"
+simple_spawn_flags_all = PackedStringArray("hs_02_done")
+simple_destroy_flags_all = PackedStringArray("hs_01_done")
 visual_texture = ExtResource("3_mtqkf")
-states = Array[Resource]([SubResource("Resource_HS01_State")])
-lifecycle = SubResource("Resource_HS01_Lifecycle")
 
 [node name="Sprite2D" parent="HS_01" index="0" unique_id=988138504]
 texture = ExtResource("3_mtqkf")
@@ -128,8 +132,10 @@ texture = ExtResource("3_mtqkf")
 [node name="HS_02" parent="." unique_id=586662335 instance=ExtResource("2_oyc2o")]
 position = Vector2(1290, 540)
 hotspot_id = "HS_02"
-states = Array[Resource]([SubResource("Resource_HS02_State")])
-lifecycle = SubResource("Resource_csf3q")
+authoring_mode = 1
+simple_mode = 0
+simple_click_dialog_timeline = "uid://cua4plv838vc4"
+simple_hide_if_flags = PackedStringArray("hs_02_done")
 
 [node name="Sprite2D" parent="HS_02" index="0" unique_id=988138504]
 texture = ExtResource("6_a71us")

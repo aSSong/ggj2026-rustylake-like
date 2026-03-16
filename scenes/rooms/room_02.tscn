@@ -276,8 +276,12 @@ texture = null
 
 [node name="HS_chair" parent="." unique_id=1119244311 instance=ExtResource("3_fnk50")]
 position = Vector2(1463, 702)
-conditions = SubResource("Resource_HSChair_BaseConditions")
-states = Array[Resource]([SubResource("Resource_Chair_S1_State")])
+authoring_mode = 1
+simple_mode = 0
+simple_click_dialog_timeline = "chair_01"
+simple_texture = ExtResource("5_vcnne")
+simple_show_if_flags_all = PackedStringArray("crack_clicked")
+simple_hide_if_flags = PackedStringArray("chair_clicked")
 
 [node name="Sprite2D" parent="HS_chair" index="0" unique_id=988138504]
 position = Vector2(28, 46)

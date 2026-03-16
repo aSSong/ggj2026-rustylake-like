@@ -12,6 +12,7 @@ extends Node
 @onready var _game_state: Node = get_node("/root/GameState")
 
 var _in_flight: Dictionary = {} # trigger_flag -> bool
+var _runtime_mapping: Dictionary = {}
 
 
 func _ready() -> void:
@@ -23,12 +24,12 @@ func _ready() -> void:
 func _on_flag_changed(flag_name: String, value: bool) -> void:
 	if not value:
 		return
-	if not mapping.has(flag_name):
+	var cfg: Variant = _get_mapping(flag_name)
+	if cfg == null:
 		return
 	if bool(_in_flight.get(flag_name, false)):
 		return
 
-	var cfg: Variant = mapping[flag_name]
 	var delay_sec := float(cfg.get("delay", 0.0))
 	var done_flag := str(cfg.get("done_flag", ""))
 	if done_flag.is_empty():
@@ -42,3 +43,19 @@ func _run_delay(trigger_flag: String, delay_sec: float, done_flag: String) -> vo
 	await get_tree().create_timer(delay_sec).timeout
 	_game_state.call("set_flag", done_flag, true)
 	_in_flight[trigger_flag] = false
+
+
+func set_runtime_mapping(new_mapping: Dictionary) -> void:
+	_runtime_mapping = new_mapping.duplicate(true)
+
+
+func clear_runtime_mapping() -> void:
+	_runtime_mapping.clear()
+
+
+func _get_mapping(flag_name: String) -> Variant:
+	if _runtime_mapping.has(flag_name):
+		return _runtime_mapping[flag_name]
+	if mapping.has(flag_name):
+		return mapping[flag_name]
+	return null
